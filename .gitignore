@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python (抽出ツール開発時)
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Node (将来的に必要な場合)
+node_modules/
+
+# Temporary
+*.tmp
+*.bak
