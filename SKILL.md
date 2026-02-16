@@ -90,20 +90,20 @@ DD 番号は `/dd new` の連番ルールに従う。
 
 作成する DD（12 件）:
 
-| 順番 | テンプレート | DD タイトル |
-|------|------------|-----------|
-| 1 | `portfolio_index.md` | 仕様抽出ポートフォリオインデックス |
-| 2 | `stage1_quantitative_inventory.md` | 定量棚卸し |
-| 3 | `stage2_analysis_scope.md` | 分析スコープ |
-| 4 | `stage3_fr_extraction.md` | FR 仕様抽出 |
-| 5 | `stage3_dataflow_extraction.md` | データフロー抽出 |
-| 6 | `stage3_state_management.md` | 状態管理抽出 |
-| 7 | `stage3_error_handling.md` | エラー処理抽出 |
-| 8 | `stage4_machine_tools.md` | 機械ツール設計 |
-| 9 | `stage5_final_spec.md` | 最終仕様 |
-| 10 | `post_migration_design.md` | 移行先設計 |
-| 11 | `post_nfr_review.md` | NFR 総合レビュー |
-| 12 | `post_ui_requirements.md` | UI 要件 |
+| No. | テンプレート | DD タイトル |
+|-----|------------|-----------|
+| 05 | `05_portfolio_index.md` | 仕様抽出ポートフォリオインデックス |
+| 10 | `10_stage1_quantitative_inventory.md` | 定量棚卸し |
+| 15 | `15_stage2_analysis_scope.md` | 分析スコープ |
+| 20 | `20_stage3_fr_extraction.md` | FR 仕様抽出 |
+| 25 | `25_stage3_dataflow_extraction.md` | データフロー抽出 |
+| 30 | `30_stage3_state_management.md` | 状態管理抽出 |
+| 35 | `35_stage3_error_handling.md` | エラー処理抽出 |
+| 40 | `40_stage4_machine_tools.md` | 機械ツール設計 |
+| 45 | `45_stage5_final_spec.md` | 最終仕様 |
+| 50 | `50_post_migration_design.md` | 移行先設計 |
+| 55 | `55_post_nfr_review.md` | NFR 総合レビュー |
+| 60 | `60_post_ui_requirements.md` | UI 要件 |
 
 ### Step 3: ポートフォリオインデックスの初期化
 

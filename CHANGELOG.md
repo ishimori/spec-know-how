@@ -11,18 +11,18 @@ v0.1 の「会話ベース Phase 0〜6 進行」から、**起動時に 12 DD �
 #### 追加
 
 - **DD テンプレート群**: `templates/spec-know-how/`（12 種）
-  - `portfolio_index.md` — 全 DD の進捗・依存関係ダッシュボード
-  - `stage1_quantitative_inventory.md` — コードベースの定量棚卸し
-  - `stage2_analysis_scope.md` — 広さ・深さ・抽出戦略の決定
-  - `stage3_fr_extraction.md` — FR（業務ロジック）仕様抽出
-  - `stage3_dataflow_extraction.md` — データフロー抽出
-  - `stage3_state_management.md` — 状態管理（セッション・権限）抽出
-  - `stage3_error_handling.md` — エラー処理抽出
-  - `stage4_machine_tools.md` — 機械抽出ツール設計・作成
-  - `stage5_final_spec.md` — 最終仕様（Stage 3 + 4 突合）
-  - `post_migration_design.md` — 移行先アーキテクチャ設計
-  - `post_nfr_review.md` — NFR 総合レビュー
-  - `post_ui_requirements.md` — 業務アプリ UI 要件
+  - `05_portfolio_index.md` — 全 DD の進捗・依存関係ダッシュボード
+  - `10_stage1_quantitative_inventory.md` — コードベースの定量棚卸し
+  - `15_stage2_analysis_scope.md` — 広さ・深さ・抽出戦略の決定
+  - `20_stage3_fr_extraction.md` — FR（業務ロジック）仕様抽出
+  - `25_stage3_dataflow_extraction.md` — データフロー抽出
+  - `30_stage3_state_management.md` — 状態管理（セッション・権限）抽出
+  - `35_stage3_error_handling.md` — エラー処理抽出
+  - `40_stage4_machine_tools.md` — 機械抽出ツール設計・作成
+  - `45_stage5_final_spec.md` — 最終仕様（Stage 3 + 4 突合）
+  - `50_post_migration_design.md` — 移行先アーキテクチャ設計
+  - `55_post_nfr_review.md` — NFR 総合レビュー
+  - `60_post_ui_requirements.md` — 業務アプリ UI 要件
 - **references/design/02_workflow-v0.2.md** — DD ポートフォリオワークフロー設計書
 
 #### 変更
