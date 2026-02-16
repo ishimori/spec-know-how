@@ -6,6 +6,45 @@ Claude Code のスキルとして動作し、既存システムのソースコ�
 
 ---
 
+## 使い方
+
+### Step 1: プロジェクトを作成し、スキルを導入する
+
+```bash
+mkdir my-new-project && cd my-new-project
+git init
+claude
+```
+
+```
+https://github.com/ishimori/spec-know-how から spec-know-how を導入して
+```
+
+Claude が spec-know-how と dd-know-how を自動的にセットアップします。
+
+### Step 2: 仕様抽出を開始する
+
+```
+/path/to/legacy-system の仕様を抽出して
+```
+
+spec-know-how が **12 DD を一括作成** し、Stage 1（定量棚卸し）を即座に開始します。
+以降は DD 内のタスクに従って自動的に進行します。
+
+### Step 3: 結果を確認する
+
+抽出された仕様は `doc/spec/` に、進捗はポートフォリオインデックス DD で確認できます。
+
+```
+doc/spec/
+├── business-logic/   # 業務ロジック仕様
+├── nfr/              # 非機能要件仕様
+├── uxm/              # UI操作モデル仕様
+└── machine-facts/    # 機械抽出結果
+```
+
+---
+
 ## 解決する問題
 
 | 問題 | 結果 |
@@ -29,21 +68,19 @@ Stage 5: 最終仕様       Stage 3 + 4 を突合、信頼度付与
 Post:    移行先設計 / NFR総合レビュー / UI要件
 ```
 
+不要な DD は作成はされますが、DD 内でスキップ判定と理由が記録されます。
+
 ## 前提条件
 
-**dd-know-how** が必須です。spec-know-how は DD（Design Document）を起票・管理するオーケストレーターであり、DD の実体管理は dd-know-how が担います。
+**dd-know-how** が必須です。spec-know-how は DD（Design Document）を起票・管理するオーケストレーターであり、DD の実体管理は dd-know-how が担います。導入時に自動的にセットアップされます。
 
-## 導入方法
+## 導入方法の詳細
 
-[IMPORT.md](IMPORT.md) を参照してください。
+[IMPORT.md](IMPORT.md) を参照してください。3 つの方法があります:
 
-```bash
-cd your-project
-claude
-> https://github.com/ishimori/spec-know-how から spec-know-how を導入して
-```
-
-dd-know-how も自動的に GitHub から取得・導入されます。
+1. **ブートストラップ（推奨）** — GitHub URL を伝えるだけ
+2. **/setup コマンド** — spec-know-how がローカルにある場合
+3. **手動セットアップ** — ファイルを自分でコピー
 
 ## 実績
 
