@@ -31,8 +31,7 @@ claude
 ```
 
 ```
-spec-know-how を導入して。
-GitHub: https://github.com/ishimori/spec-know-how.git
+spec-know-how を導入して
 ```
 
 Claude が以下を自動実行します:
@@ -44,6 +43,7 @@ Claude が以下を自動実行します:
 5. `tmp/` を削除してクリーンアップ
 
 > **仕組み**: Claude は IMPORT.md の手順を読み取って実行します。
+> GitHub URL はスキル内に固定されているため、ユーザーが指定する必要はありません。
 > `/setup` スキルがなくても、この手順を依頼すれば動作します。
 
 #### ブートストラップ手順（Claude が実行する内容）
