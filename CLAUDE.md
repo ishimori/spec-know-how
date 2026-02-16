@@ -13,15 +13,15 @@
 
 | パス | 用途 |
 |------|------|
-| `SKILL.md` | スキル定義本体。Phase 0〜6 のワークフロー、信頼度ルール、Gate 定義 |
+| `SKILL.md` | スキル定義本体。DD ポートフォリオ一括作成モデル、信頼度ルール |
 | `IMPORT.md` | 別プロジェクトへの導入手順 |
 | `CHANGELOG.md` | バージョン履歴 |
+| `templates/spec-know-how/` | DD テンプレート群（12種。起動時に一括使用） |
 | `references/design/` | 設計書（ベース思想、ワークフロー、DD連携、チェックリスト、実行手順） |
 | `references/examples/` | 実行例（DD-002: ドキュメント棚卸し、DD-003: 業務ロジック仕様抽出） |
 | `references/methodology/` | 方法論（5ステップ抽出プロセス）、教訓（44DD以上の経験） |
 | `references/skills/` | 実装済みスキル例（verify, qa, workflow, dd, review, review-spec） |
 | `references/background/` | 背景・思想（意思決定記録、Document-First/Verify-First の根拠） |
-
 
 ## 利用可能なスキル
 
@@ -30,9 +30,13 @@
 
 ## 設計判断の記録
 
+### v0.2: DD ポートフォリオ一括作成モデル
+
+v0.1 の「会話ベース Phase 進行」から転換。起動時に 12 DD を一括作成し、DD の中で判断する。
+
 ### 信頼度は 4 段階
 
-`High` / `Medium` / `Low` / `Conflicting`。`Conflicting` はブロッキング状態であり、解消するまで次フェーズに進めない。
+`High` / `Medium` / `Low` / `Conflicting`。`Conflicting` はブロッキング状態であり、解消が必要。
 
 ### QA 信頼度 ≦ 仕様信頼度
 
@@ -40,7 +44,11 @@ QA 回答の信頼度は元の仕様項目の信頼度を超えない。
 
 ### stale フラグ方式
 
-コード変更時は即時再生成ではなく stale マーク → 再評価。リリース前 Gate で stale が 0 件であることを完了条件とする。
+コード変更時は即時再生成ではなく stale マーク → 再評価。
+
+### スキップも意思決定
+
+DD は削除せず、スキップ理由を記録して判断の痕跡を残す。
 
 ## メンテナンス方針
 

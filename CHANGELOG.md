@@ -4,31 +4,47 @@ spec-know-how のバージョン履歴。[Semantic Versioning](https://semver.or
 
 ## [v0.2.0] — 2026-02-16
 
-### 用語日本語化 + 規模別段階化戦略の追加
+### DD ポートフォリオ一括作成モデルへの転換
 
-#### 改善内容
+v0.1 の「会話ベース Phase 0〜6 進行」から、**起動時に 12 DD を一括作成し、DD の中で判断する** モデルに転換。
 
-1. **用語の日本語化（表示レベル）**
-   - `FR` → `機能要件（FR）`
-   - `NFR` → `非機能要件（NFR）`
-   - `UXM` → `UI操作モデル（UXM）`
-   - 信頼度ラベルも日本語併記化（検討中）
+#### 追加
 
-2. **プロジェクト規模による自動段階化**
-   - Phase 0 に「コード規模」「ドメイン複雑性」の判定を追加
-   - 規模別進め方の選択（即座生成 / 標準進行 / 段階的実行 / 全体DD+分割）
-   - Gate 0・1 の判定基準を規模別に拡張
+- **DD テンプレート群**: `templates/spec-know-how/`（12 種）
+  - `portfolio_index.md` — 全 DD の進捗・依存関係ダッシュボード
+  - `stage1_quantitative_inventory.md` — コードベースの定量棚卸し
+  - `stage2_analysis_scope.md` — 広さ・深さ・抽出戦略の決定
+  - `stage3_fr_extraction.md` — FR（業務ロジック）仕様抽出
+  - `stage3_dataflow_extraction.md` — データフロー抽出
+  - `stage3_state_management.md` — 状態管理（セッション・権限）抽出
+  - `stage3_error_handling.md` — エラー処理抽出
+  - `stage4_machine_tools.md` — 機械抽出ツール設計・作成
+  - `stage5_final_spec.md` — 最終仕様（Stage 3 + 4 突合）
+  - `post_migration_design.md` — 移行先アーキテクチャ設計
+  - `post_nfr_review.md` — NFR 総合レビュー
+  - `post_ui_requirements.md` — 業務アプリ UI 要件
+- **references/design/02_workflow-v0.2.md** — DD ポートフォリオワークフロー設計書
 
-3. **生成物の出力先ルール明示**
-   - 分析対象プロジェクト配下ではなく、実行元プロジェクト配下に生成物を作成
-   - 複数プロジェクトの仕様を一元管理可能に
+#### 変更
 
-#### ファイル変更
+- **SKILL.md**: Phase 0〜6 モデルから DD ポートフォリオモデルに全面書き換え
+  - 起動プロトコル（パス受領 → 全 DD 一括作成 → Stage 1 即時開始）
+  - 依存関係ベースの実行順序（Gate 方式廃止）
+  - スキップ判定の 2 パス方式（作成時 + 実行時）
+  - Stage 4 スキップ時の信頼度上限制約（Medium）
+- **IMPORT.md**: テンプレートコピー手順を追加、フォルダ構造に `doc/templates/spec-know-how/` を追加
+- **setup/SKILL.md**: テンプレートコピー手順を追加、完了報告を更新
 
-- **references/design/01_foundation.md**: 用語定義を日本語併記化
-- **references/design/02_workflow-v0.1.md**: Phase 0・1 に規模判定と段階的DD戦略を追加
-- **references/design/04_alignment-checklist.md**: 出力先ルールを合意チェックリストに追加
-- **SKILL.md**: 上記を全て反映
+#### 設計根拠
+
+1. 会話ベースの Phase 進行は LLM の回答が不安定で確実性が低い
+2. DD を先に全部作ることで全体像が最初から見える
+3. 各 DD 内でスキップ判断を記録することで判断の痕跡が残る
+4. 依存関係ベースにすることで並列実行が自然に可能
+
+### 動作確認済み dd-know-how バージョン
+
+- コミット: 56a51bf
 
 ---
 

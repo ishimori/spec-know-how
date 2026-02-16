@@ -6,11 +6,11 @@
 
 | 機能 | 効果 |
 |------|------|
-| **仕様抽出ワークフロー** | Phase 0〜6 の体系的な抽出プロセス |
+| **DD ポートフォリオ一括作成** | 起動時に 12 DD を自動生成、構造の中で判断する |
 | **信頼度管理** | 4段階（High/Medium/Low/Conflicting）の信頼度付き仕様 |
 | **QA インデックス** | 仕様問い合わせに根拠付きで即答 |
 | **機械抽出戦略** | プロジェクトの技術スタックに応じた可変型抽出 |
-| **Gate 判定** | 各フェーズの完了条件を明確化 |
+| **DD テンプレート群** | Stage 1〜5 + Post の専用テンプレート 12 種 |
 
 ## 前提条件
 
@@ -38,7 +38,7 @@ Claude が以下を自動実行します:
 
 1. `tmp/_spec-know-how` と `tmp/_dd-know-how` を GitHub から shallow clone
 2. dd-know-how Level 2（DD管理 + DA批判レビュー）を導入
-3. spec-know-how（SKILL.md + 参照資料）を導入
+3. spec-know-how（SKILL.md + テンプレート + 参照資料）を導入
 4. CLAUDE.md にバージョン・設定を追記
 5. `tmp/` を削除してクリーンアップ
 
@@ -68,14 +68,18 @@ mkdir -p doc/spec-know-how/references
 cp -r tmp/_spec-know-how/references/design   doc/spec-know-how/references/
 cp -r tmp/_spec-know-how/references/examples doc/spec-know-how/references/
 
-# 4. 成果物フォルダ
-mkdir -p doc/spec/business-logic doc/spec/nfr doc/spec/uxm
+# 4. DD テンプレート群を導入（v0.2 新規）
+mkdir -p doc/templates/spec-know-how
+cp -r tmp/_spec-know-how/templates/spec-know-how/ doc/templates/spec-know-how/
 
-# 5. クリーンアップ
+# 5. 成果物フォルダ
+mkdir -p doc/spec/business-logic doc/spec/nfr doc/spec/uxm doc/spec/machine-facts
+
+# 6. クリーンアップ
 rm -rf tmp/_spec-know-how tmp/_dd-know-how
 rmdir tmp 2>/dev/null
 
-# 6. .gitignore に tmp/ を追加（安全策）
+# 7. .gitignore に tmp/ を追加（安全策）
 grep -q '^tmp/' .gitignore 2>/dev/null || echo 'tmp/' >> .gitignore
 ```
 
@@ -91,7 +95,7 @@ claude
 
 dd-know-how が未導入であれば、ローカル探索 → GitHub clone の順で自動導入します。
 
-### 方法2: 手動セットアップ
+### 方法 3: 手動セットアップ
 
 以下、`spec-know-how/` は本リポジトリのパス、`your-project/` は導入先のパスです。
 
@@ -116,10 +120,18 @@ mkdir -p .claude/skills/spec-know-how
 cp spec-know-how/SKILL.md .claude/skills/spec-know-how/
 ```
 
-#### Step 3: 参照資料の配置（推奨）
+#### Step 3: DD テンプレート群の配置（必須）
 
 ```bash
-# 参照資料をコピー（運用チェックルール・実行例・方法論）
+# spec-know-how 専用 DD テンプレートをコピー
+mkdir -p doc/templates/spec-know-how
+cp -r spec-know-how/templates/spec-know-how/ doc/templates/spec-know-how/
+```
+
+#### Step 4: 参照資料の配置（推奨）
+
+```bash
+# 参照資料をコピー（設計書・実行例）
 mkdir -p doc/spec-know-how/references
 cp -r spec-know-how/references/design    doc/spec-know-how/references/
 cp -r spec-know-how/references/examples  doc/spec-know-how/references/
@@ -133,7 +145,7 @@ cp -r spec-know-how/references/skills        doc/spec-know-how/references/
 cp -r spec-know-how/references/background    doc/spec-know-how/references/
 ```
 
-#### Step 4: CLAUDE.md に追記
+#### Step 5: CLAUDE.md に追記
 
 導入先の `CLAUDE.md` に以下を追記:
 
@@ -141,17 +153,19 @@ cp -r spec-know-how/references/background    doc/spec-know-how/references/
 ## 仕様抽出（spec-know-how）
 
 - **スキル**: `/spec-know-how` — レガシーコードからの仕様抽出ワークフロー
+- **DD テンプレート**: `doc/templates/spec-know-how/`（12 種）
 - **参照資料**: `doc/spec-know-how/references/`
 - **信頼度ルール**: High / Medium / Low / Conflicting（4段階）
 - **QA応答要件**: 回答 + 信頼度 + 根拠行 + コミットSHA + 生成日時
 ```
 
-#### Step 5: 仕様抽出の成果物フォルダ作成
+#### Step 6: 仕様抽出の成果物フォルダ作成
 
 ```bash
 mkdir -p doc/spec/business-logic  # FR（機能要件）の仕様書
 mkdir -p doc/spec/nfr             # NFR（非機能要件）の仕様書
 mkdir -p doc/spec/uxm             # UI操作モデルの仕様書
+mkdir -p doc/spec/machine-facts   # 機械抽出結果
 ```
 
 ## 導入後のフォルダ構造
@@ -169,11 +183,14 @@ your-project/
 ├── doc/
 │   ├── DD/                            # DD設計書（dd-know-how）
 │   ├── archived/DD/                   # アーカイブ済みDD
-│   ├── templates/                     # DDテンプレート
+│   ├── templates/                     # テンプレート
+│   │   ├── dd_template.md             # DD汎用テンプレート
+│   │   └── spec-know-how/             # ★ 仕様抽出用DDテンプレート（12種）
 │   ├── spec/                          # ★ 仕様抽出の成果物
 │   │   ├── business-logic/            # FR仕様書
 │   │   ├── nfr/                       # NFR仕様書
-│   │   └── uxm/                       # UI操作モデル仕様書
+│   │   ├── uxm/                       # UI操作モデル仕様書
+│   │   └── machine-facts/             # 機械抽出結果
 │   └── spec-know-how/                 # ★ 参照資料
 │       └── references/
 └── CLAUDE.md
@@ -186,10 +203,10 @@ your-project/
 ```bash
 cd spec-know-how
 git log --oneline -1
-# → abc1234 v0.1.0: 初期リリース
+# → abc1234 v0.2.0: DD ポートフォリオ一括作成モデル
 
 # 導入先の CLAUDE.md に記録
-echo "- spec-know-how: abc1234 (v0.1.0)" >> your-project/CLAUDE.md
+echo "- spec-know-how: abc1234 (v0.2.0)" >> your-project/CLAUDE.md
 ```
 
 案件途中でスキルの挙動が変わることを防ぐため、バージョンを固定して運用します。
@@ -198,6 +215,7 @@ echo "- spec-know-how: abc1234 (v0.1.0)" >> your-project/CLAUDE.md
 
 - [ ] dd-know-how が導入済み（`/dd list` が動作する）
 - [ ] `.claude/skills/spec-know-how/SKILL.md` が配置されている
+- [ ] `doc/templates/spec-know-how/` に 12 テンプレートが存在する
 - [ ] `CLAUDE.md` に spec-know-how の設定が記載されている
 - [ ] `doc/spec/` フォルダが存在する
 - [ ] 使用バージョンが `CLAUDE.md` に記録されている
@@ -214,7 +232,12 @@ echo "- spec-know-how: abc1234 (v0.1.0)" >> your-project/CLAUDE.md
 - dd-know-how が導入されているか確認（`/dd list` で動作確認）
 - dd-know-how の Level が 2 以上であることを確認
 
+### DD テンプレートがない
+
+- `doc/templates/spec-know-how/` の存在を確認
+- 12 ファイルが揃っているか確認（portfolio_index, stage1〜5, post x3）
+
 ### 機械抽出ツールがない
 
-- Phase 2 で対象プロジェクトに適した抽出ツールを選定します
+- Stage 4 DD 内で対象プロジェクトに適した抽出ツールを設計・作成します
 - Python AST 解析が必要な場合は `references/skills/verify_SKILL.md` を参考に構築します

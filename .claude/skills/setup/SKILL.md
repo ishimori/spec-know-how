@@ -72,13 +72,11 @@ dd-know-how = 以下の優先順で探索:
 
 #### GitHub から取得する場合（パターン B、またはパターン A で dd-know-how 未発見時）
 
-GitHub からコードをダウンロードします。`--depth 1` は「最新版だけダウンロード」という指定で、過去のすべてのバージョン履歴をダウンロードしないことで、時間と容量を節約します。
-
 ```bash
 # 対象プロジェクト内に一時ディレクトリを作成
 mkdir -p {対象プロジェクト}/tmp
 
-# GitHub からダウンロード（最新版のみ）
+# shallow clone（高速化）
 git clone --depth 1 {SPEC_KNOW_HOW_REPO} {対象プロジェクト}/tmp/_spec-know-how
 git clone --depth 1 {DD_KNOW_HOW_REPO}   {対象プロジェクト}/tmp/_dd-know-how
 ```
@@ -118,13 +116,13 @@ dd-know-how のバージョン（コミット SHA）を記録。
 
 ### 4. 導入レベルの選択
 
-3つのレベルから選択します。どのくらい詳しい説明資料を一緒に導入するかによります：
+ユーザーに導入レベルを確認:
 
-| レベル | インストールされるもの | どんなときに選ぶか |
+| レベル | 内容 | 推奨ケース |
 |--------|------|------------|
-| **Level 1（最小構成）** | スキルファイル（SKILL.md）のみ | 「まずスキルだけ試してみたい」「ドキュメント類は不要」という場合 |
-| **Level 2（標準構成）⭐推奨** | スキル + 設計書 + 実行例 | 「通常のセットアップ。基本的な説明資料があると安心」という場合 |
-| **Level 3（フル構成）** | Level 2 の全て + 方法論・教訓・スキル実装例・背景思想など | 「spec-know-how を深く理解したい」「チーム全体で導入・運用したい」という場合 |
+| Level 1（最小） | SKILL.md のみ | まず試したい |
+| **Level 2（標準）** | + 設計書 + 実行例 | **通常利用（推奨）** |
+| Level 3（フル） | + 方法論・教訓 + スキル例 + 背景資料 | 深い理解が必要 |
 
 ### 5. ファイルのコピー
 
@@ -135,6 +133,10 @@ dd-know-how のバージョン（コミット SHA）を記録。
 ```bash
 mkdir -p {対象}/.claude/skills/spec-know-how
 cp {spec-src}/SKILL.md {対象}/.claude/skills/spec-know-how/
+
+# DD テンプレート群（必須）
+mkdir -p {対象}/doc/templates/spec-know-how
+cp -r {spec-src}/templates/spec-know-how/ {対象}/doc/templates/spec-know-how/
 ```
 
 #### Level 2（標準構成）— Level 1 に加えて
@@ -155,16 +157,11 @@ cp -r {spec-src}/references/background  {対象}/doc/spec-know-how/references/
 
 ### 6. 仕様抽出の成果物フォルダ作成
 
-以下の3つのフォルダを作成します。それぞれの意味：
-
-- **business-logic フォルダ** = 機能要件（「ユーザーは何ができるか」という「できること」）
-- **nfr フォルダ** = 非機能要件（「どのように動くか」という要件。例：ログ出力、セキュリティ、パフォーマンス、運用など）
-- **uxm フォルダ** = UI操作モデル（Excel のグリッド操作など、複雑な画面操作をまとめたもの）
-
 ```bash
-mkdir -p {対象}/doc/spec/business-logic
-mkdir -p {対象}/doc/spec/nfr
-mkdir -p {対象}/doc/spec/uxm
+mkdir -p {対象}/doc/spec/business-logic  # FR（機能要件）
+mkdir -p {対象}/doc/spec/nfr             # NFR（非機能要件）
+mkdir -p {対象}/doc/spec/uxm             # UI操作モデル
+mkdir -p {対象}/doc/spec/machine-facts   # 機械抽出結果
 ```
 
 ### 7. CLAUDE.md の更新
@@ -181,14 +178,12 @@ mkdir -p {対象}/doc/spec/uxm
 
 ### 信頼度ルール
 
-各項目の信頼度は以下のように判定されます：
-
-| 信頼度 | 意味 | 使い方 |
-|--------|------|--------|
-| **High** | コード解析で直接確認できた。根拠の行番号が明確 | そのまま利用可。信頼できる |
-| **Medium** | コードから推測した部分がある。すべてが確認できたわけではない | 注意付きで利用可。疑わしい部分は確認すること |
-| **Low** | 根拠が不十分。推測が多い | 使う前に必ず調査・確認が必要 |
-| **Conflicting** | コードの異なる箇所で矛盾している。どちらが正しいか不明 | 利用不可。矛盾を解消するまで進めない |
+| 信頼度 | 定義 | アクション |
+|--------|------|-----------|
+| High | 機械裏付けあり | そのまま利用可 |
+| Medium | 一部推論 | 注意付きで利用可 |
+| Low | 根拠不足 | 調査が必要 |
+| Conflicting | 矛盾あり | 解消するまで利用不可 |
 
 ### QA 応答要件
 
@@ -226,18 +221,15 @@ grep -q '^tmp/' {対象}/.gitignore 2>/dev/null || echo 'tmp/' >> {対象}/.giti
 - dd スキル:         .claude/skills/dd/SKILL.md
 - workflow スキル:   .claude/skills/workflow/SKILL.md
 - spec-know-how:    .claude/skills/spec-know-how/SKILL.md
+- DD テンプレート:    doc/templates/spec-know-how/（12種）
 - 参照資料:          doc/spec-know-how/references/（Level 2 以上）
-- 成果物フォルダ:     doc/spec/（business-logic, nfr, uxm）
+- 成果物フォルダ:     doc/spec/（business-logic, nfr, uxm, machine-facts）
 - DD フォルダ:       doc/DD/
-- DD テンプレート:    doc/templates/dd_template.md
+- DD 汎用テンプレート: doc/templates/dd_template.md
 
 【次のステップ】
-1. SKILL.md の Phase 0（ヒアリング）を開始してください
-2. 移行元システムの情報を準備してください:
-   - 言語/フレームワーク/DB/構成
-   - 主対象ドメイン
-   - 重要な非機能要件（パフォーマンス要件、セキュリティ要件、監査・ログ要件など）
-   - 既存ドキュメントの所在
+1. 仕様抽出対象のコードベースのパスを伝えてください
+2. spec-know-how が 12 DD を自動作成し、Stage 1（定量棚卸し）を即座に開始します
 ```
 
 ## 注意事項
