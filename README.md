@@ -35,30 +35,15 @@ Phase 6: 継続改善       問題発見→外部AI評価→解決条件ルー�
 
 ## 導入方法
 
-### 初回のみ: グローバル設定
-
-`~/.claude/CLAUDE.md` に以下を追記してください（一度だけ）:
-
-```markdown
-## Know-How スキル
-
-「spec-know-how を導入して」と言われたら:
-
-1. `https://github.com/ishimori/spec-know-how.git` を `tmp/_spec-know-how` に shallow clone
-2. `tmp/_spec-know-how/IMPORT.md` の「ブートストラップ手順」に従って導入を実行
-3. dd-know-how も同手順内で自動導入される
-```
-
-### プロジェクトへの導入
+[IMPORT.md](IMPORT.md) を参照してください。
 
 ```bash
 cd your-project
 claude
-> spec-know-how を導入して
+> https://github.com/ishimori/spec-know-how から spec-know-how を導入して
 ```
 
-これだけで spec-know-how と dd-know-how が自動的に導入されます。
-詳細は [IMPORT.md](IMPORT.md) を参照。
+dd-know-how も自動的に GitHub から取得・導入されます。
 
 ## 実績
 
