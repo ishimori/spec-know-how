@@ -20,6 +20,22 @@ spec-know-how は DD を起票・管理するオーケストレーターであ�
 
 ## セットアップ
 
+### 初回のみ: グローバル設定
+
+`~/.claude/CLAUDE.md` に以下を追記してください（一度だけ）:
+
+```markdown
+## Know-How スキル
+
+「spec-know-how を導入して」と言われたら:
+
+1. `https://github.com/ishimori/spec-know-how.git` を `tmp/_spec-know-how` に shallow clone
+2. `tmp/_spec-know-how/IMPORT.md` の「ブートストラップ手順」に従って導入を実行
+3. dd-know-how も同手順内で自動導入される
+```
+
+この設定により、Claude はどのプロジェクトでも URL なしで spec-know-how を導入できるようになります。
+
 ### 方法 1: ブートストラップ（推奨 — リポジトリ不要）
 
 対象プロジェクト内で Claude Code を起動し、以下を依頼するだけで導入できます。
@@ -42,8 +58,7 @@ Claude が以下を自動実行します:
 4. CLAUDE.md にバージョン・設定を追記
 5. `tmp/` を削除してクリーンアップ
 
-> **仕組み**: Claude は IMPORT.md の手順を読み取って実行します。
-> GitHub URL はスキル内に固定されているため、ユーザーが指定する必要はありません。
+> **仕組み**: `~/.claude/CLAUDE.md` のグローバル設定により、Claude がこの IMPORT.md を取得・参照して実行します。
 > `/setup` スキルがなくても、この手順を依頼すれば動作します。
 
 #### ブートストラップ手順（Claude が実行する内容）
