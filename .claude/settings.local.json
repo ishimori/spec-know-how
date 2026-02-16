@@ -16,7 +16,8 @@
       "Bash(git branch *)",
       "Bash(npm *)",
       "Bash(npm run *)",
-      "Bash(make *)"
+      "Bash(make *)",
+      "Bash(git push:*)"
     ],
     "deny": [
       "Bash(git push *)",
