@@ -7,7 +7,18 @@ description: 対象プロジェクトに spec-know-how + dd-know-how を導入�
 
 外部プロジェクトに spec-know-how（+ 必須依存の dd-know-how）を導入するコマンドです。
 
+## GitHub リポジトリ URL（設定）
+
+```
+SPEC_KNOW_HOW_REPO=https://github.com/ishimori/spec-know-how.git
+DD_KNOW_HOW_REPO=https://github.com/ishimori/dd-know-how.git
+```
+
+> URL を変更する場合はここを編集してください。
+
 ## 使い方
+
+### パターン A: spec-know-how リポジトリ内から実行
 
 ```
 /setup {対象プロジェクトのパス}
@@ -16,24 +27,61 @@ description: 対象プロジェクトに spec-know-how + dd-know-how を導入�
 **例:**
 - `/setup /path/to/my-project`
 - `/setup ../my-other-project`
-- `/setup` （対話でパスを指定）
 
-## 前提条件
+### パターン B: 対象プロジェクト内から実行（ブートストラップ）
 
-このコマンドは **spec-know-how リポジトリ内** で実行します。
+対象プロジェクト内で Claude Code を起動し、以下を依頼:
+
+```
+spec-know-how を導入して。
+GitHub: https://github.com/ishimori/spec-know-how.git
+```
+
+この場合、Claude が以下のブートストラップ手順を実行します:
+
+1. `tmp/_spec-know-how` に clone
+2. `tmp/_dd-know-how` に clone
+3. 必要ファイルをコピー
+4. `tmp/_spec-know-how`, `tmp/_dd-know-how` を削除
+
+> ブートストラップは spec-know-how スキルがなくても実行可能です。
+> IMPORT.md の「ブートストラップ（ワンライナー）」セクションに手順があります。
 
 ## セットアップ手順
 
-### 1. 対象プロジェクトの確認
+### 1. 実行元の判定
 
-引数でパスが指定された場合:
-- そのパスが存在し、ディレクトリであることを確認
-- 確認できない場合はエラーメッセージを表示
+**spec-know-how リポジトリ内から実行している場合:**
+- ソースは自身のリポジトリ（ローカルファイル）
+- 対象プロジェクトは引数で指定
 
-引数がない場合:
-- ユーザーに対象プロジェクトのパスを質問
+**対象プロジェクト内から実行している場合（ブートストラップ）:**
+- ソースは GitHub から clone
+- 対象プロジェクトはカレントディレクトリ
 
-### 2. dd-know-how の依存チェック（CRITICAL）
+### 2. ソースの取得
+
+#### ローカルにある場合（パターン A）
+
+spec-know-how = カレントディレクトリ
+dd-know-how = 以下の優先順で探索:
+
+1. `{対象プロジェクト}/.claude/skills/dd/SKILL.md` が存在 → 導入済み（スキップ）
+2. `../dd-know-how/` が存在 → ローカルから使用
+3. 見つからない → GitHub から clone
+
+#### GitHub から取得する場合（パターン B、またはパターン A で dd-know-how 未発見時）
+
+```bash
+# 対象プロジェクト内に一時ディレクトリを作成
+mkdir -p {対象プロジェクト}/tmp
+
+# shallow clone（高速化）
+git clone --depth 1 {SPEC_KNOW_HOW_REPO} {対象プロジェクト}/tmp/_spec-know-how
+git clone --depth 1 {DD_KNOW_HOW_REPO}   {対象プロジェクト}/tmp/_dd-know-how
+```
+
+### 3. dd-know-how の導入チェック（CRITICAL）
 
 対象プロジェクトに dd-know-how が導入済みか確認:
 
@@ -44,64 +92,29 @@ ls {対象プロジェクト}/.claude/skills/workflow/SKILL.md
 
 #### 導入済みの場合
 
-→ Step 3 へ進む
+→ Step 4 へ
 
 #### 未導入の場合
 
-dd-know-how リポジトリを探索:
+dd-know-how ソース（ローカルまたは `tmp/_dd-know-how`）から Level 2 を導入:
 
 ```bash
-# 同じ親ディレクトリに dd-know-how があるか探す
-ls ../dd-know-how/ 2>/dev/null
-# よくあるパスを確認
-ls ~/repos/dd-know-how/ 2>/dev/null
-ls ~/projects/dd-know-how/ 2>/dev/null
+# フォルダ作成
+mkdir -p {対象}/doc/DD {対象}/doc/templates {対象}/doc/archived/DD
+
+# テンプレート・ルール
+cp {dd-src}/templates/dd_template.md  {対象}/doc/templates/
+cp {dd-src}/rules/dd-basic-rules.md   {対象}/doc/templates/
+
+# スキル
+mkdir -p {対象}/.claude/skills/dd {対象}/.claude/skills/workflow
+cp {dd-src}/.claude/skills/dd/SKILL.md       {対象}/.claude/skills/dd/
+cp {dd-src}/.claude/skills/workflow/SKILL.md  {対象}/.claude/skills/workflow/
 ```
 
-**見つかった場合:**
+dd-know-how のバージョン（コミット SHA）を記録。
 
-ユーザーに確認:
-
-```
-⚠️ dd-know-how が対象プロジェクトに未導入です。
-spec-know-how は dd-know-how（Level 2 以上）が必須です。
-
-dd-know-how が {見つかったパス} にあります。
-先に dd-know-how を導入しますか？
-
-1. はい — dd-know-how の Level 2 セットアップを実行してから spec-know-how を導入
-2. いいえ — spec-know-how のみ導入（DD起票機能は動作しません）
-```
-
-「はい」の場合:
-1. dd-know-how の IMPORT.md に記載の Level 2 手順を実行:
-   - `doc/DD/`, `doc/templates/`, `doc/archived/DD/` フォルダ作成
-   - `dd-know-how/templates/dd_template.md` → `{対象}/doc/templates/`
-   - `dd-know-how/rules/dd-basic-rules.md` → `{対象}/doc/templates/`
-   - `dd-know-how/.claude/skills/dd/SKILL.md` → `{対象}/.claude/skills/dd/`
-   - `dd-know-how/.claude/skills/workflow/SKILL.md` → `{対象}/.claude/skills/workflow/`
-2. dd-know-how セットアップ完了を確認してから Step 3 へ
-
-**見つからない場合:**
-
-```
-⚠️ dd-know-how が対象プロジェクトに未導入です。
-spec-know-how は dd-know-how（Level 2 以上）が必須です。
-
-dd-know-how リポジトリが見つかりません。
-以下のいずれかを行ってください:
-
-1. dd-know-how リポジトリを取得:
-   git clone https://github.com/xxx/dd-know-how.git
-
-2. dd-know-how 内で対象プロジェクトへセットアップ:
-   cd dd-know-how && claude
-   > /setup {対象プロジェクトのパス}
-
-3. その後、再度 spec-know-how の /setup を実行してください。
-```
-
-### 3. 導入レベルの選択
+### 4. 導入レベルの選択
 
 ユーザーに導入レベルを確認:
 
@@ -111,64 +124,50 @@ dd-know-how リポジトリが見つかりません。
 | **Level 2（標準）** | + 設計書 + 実行例 | **通常利用（推奨）** |
 | Level 3（フル） | + 方法論・教訓 + スキル例 + 背景資料 | 深い理解が必要 |
 
-### 4. ファイルのコピー
+### 5. ファイルのコピー
+
+`{spec-src}` = spec-know-how のソース（ローカル or `tmp/_spec-know-how`）
 
 #### Level 1（最小構成）
 
-```
-{対象プロジェクト}/
-└── .claude/
-    └── skills/
-        └── spec-know-how/
-            └── SKILL.md          # ← spec-know-how/SKILL.md
+```bash
+mkdir -p {対象}/.claude/skills/spec-know-how
+cp {spec-src}/SKILL.md {対象}/.claude/skills/spec-know-how/
 ```
 
 #### Level 2（標準構成）— Level 1 に加えて
 
-```
-{対象プロジェクト}/
-├── .claude/
-│   └── skills/
-│       └── spec-know-how/
-│           └── SKILL.md
-└── doc/
-    └── spec-know-how/
-        └── references/
-            ├── design/           # ← spec-know-how/references/design/
-            └── examples/         # ← spec-know-how/references/examples/
+```bash
+mkdir -p {対象}/doc/spec-know-how/references
+cp -r {spec-src}/references/design   {対象}/doc/spec-know-how/references/
+cp -r {spec-src}/references/examples {対象}/doc/spec-know-how/references/
 ```
 
 #### Level 3（フル構成）— Level 2 に加えて
 
-```
-{対象プロジェクト}/
-└── doc/
-    └── spec-know-how/
-        └── references/
-            ├── design/           # （Level 2 で配置済み）
-            ├── examples/         # （Level 2 で配置済み）
-            ├── methodology/      # ← spec-know-how/references/methodology/
-            ├── skills/           # ← spec-know-how/references/skills/
-            └── background/       # ← spec-know-how/references/background/
+```bash
+cp -r {spec-src}/references/methodology {対象}/doc/spec-know-how/references/
+cp -r {spec-src}/references/skills      {対象}/doc/spec-know-how/references/
+cp -r {spec-src}/references/background  {対象}/doc/spec-know-how/references/
 ```
 
-### 5. 仕様抽出の成果物フォルダ作成
+### 6. 仕様抽出の成果物フォルダ作成
 
 ```bash
-mkdir -p {対象プロジェクト}/doc/spec/business-logic  # FR（機能要件）
-mkdir -p {対象プロジェクト}/doc/spec/nfr              # NFR（非機能要件）
-mkdir -p {対象プロジェクト}/doc/spec/uxm              # UI操作モデル
+mkdir -p {対象}/doc/spec/business-logic  # FR（機能要件）
+mkdir -p {対象}/doc/spec/nfr             # NFR（非機能要件）
+mkdir -p {対象}/doc/spec/uxm             # UI操作モデル
 ```
 
-### 6. CLAUDE.md の更新
+### 7. CLAUDE.md の更新
 
-対象プロジェクトの CLAUDE.md に以下を追記（重複チェック実施）:
+対象プロジェクトの CLAUDE.md に以下を追記（`spec-know-how` の文字列で重複チェック）:
 
 ```markdown
 ## 仕様抽出（spec-know-how）
 
 - **依存**: dd-know-how（Level 2 以上）
-- **バージョン**: {spec-know-how の最新コミット SHA 短縮7桁}
+- **バージョン**: spec-know-how {SHA 短縮7桁}, dd-know-how {SHA 短縮7桁}
 - **参照資料**: `doc/spec-know-how/references/`（Level 2 以上で配置）
 - **成果物**: `doc/spec/`（business-logic, nfr, uxm）
 
@@ -186,31 +185,41 @@ mkdir -p {対象プロジェクト}/doc/spec/uxm              # UI操作モデ�
 回答 + 信頼度 + 根拠行 + コミットSHA + 生成日時
 ```
 
-### 7. バージョン固定
+### 8. tmp の削除
 
-spec-know-how の現在のコミット SHA を取得して記録:
+GitHub から clone した場合、一時ディレクトリを削除:
 
 ```bash
-cd {spec-know-how のパス}
-git log --oneline -1
-# → 例: 1c7a3a6 v0.1.0: spec-know-how 初期構築
+rm -rf {対象}/tmp/_spec-know-how {対象}/tmp/_dd-know-how
+# tmp/ が空なら削除
+rmdir {対象}/tmp 2>/dev/null
 ```
 
-CLAUDE.md のバージョン欄に記録する。
+### 9. .gitignore の更新
 
-### 8. 完了報告
+対象プロジェクトの `.gitignore` に `tmp/` が含まれていなければ追加:
+
+```bash
+grep -q '^tmp/' {対象}/.gitignore 2>/dev/null || echo 'tmp/' >> {対象}/.gitignore
+```
+
+### 10. 完了報告
 
 ```
-✓ spec-know-how のセットアップが完了しました
+✓ spec-know-how + dd-know-how のセットアップが完了しました
 
-【依存関係】
-- dd-know-how: ✅ 導入済み
-- spec-know-how: ✅ 導入済み（{バージョン}）
+【ソース】
+- spec-know-how: {ローカル or GitHub} ({SHA})
+- dd-know-how:   {ローカル or GitHub or 導入済み} ({SHA})
 
 【配置されたファイル】
-- スキル: .claude/skills/spec-know-how/SKILL.md
-- 参照資料: doc/spec-know-how/references/（Level 2 以上）
-- 成果物フォルダ: doc/spec/（business-logic, nfr, uxm）
+- dd スキル:         .claude/skills/dd/SKILL.md
+- workflow スキル:   .claude/skills/workflow/SKILL.md
+- spec-know-how:    .claude/skills/spec-know-how/SKILL.md
+- 参照資料:          doc/spec-know-how/references/（Level 2 以上）
+- 成果物フォルダ:     doc/spec/（business-logic, nfr, uxm）
+- DD フォルダ:       doc/DD/
+- DD テンプレート:    doc/templates/dd_template.md
 
 【次のステップ】
 1. SKILL.md の Phase 0（ヒアリング）を開始してください
@@ -223,6 +232,8 @@ CLAUDE.md のバージョン欄に記録する。
 
 ## 注意事項
 
-- 既存ファイルがある場合は上書き前に確認
+- 既存ファイルがある場合は上書き前にユーザーに確認
 - CLAUDE.md への追記は重複チェック（`spec-know-how` の文字列検索）を行う
 - dd-know-how の自動導入は Level 2 固定（Level 3 は dd-know-how 側で手動昇格）
+- `--depth 1` で shallow clone するため、clone 元の履歴は取得しない
+- clone 後の tmp は必ず削除する（`tmp/` を .gitignore に追加済み）

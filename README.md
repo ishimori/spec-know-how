@@ -38,11 +38,13 @@ Phase 6: 継続改善       問題発見→外部AI評価→解決条件ルー�
 [IMPORT.md](IMPORT.md) を参照してください。
 
 ```bash
-# 推奨: spec-know-how リポジトリ内で Claude Code を起動し /setup で導入
-cd spec-know-how
+# 推奨: 対象プロジェクト内で Claude Code を起動し、GitHub URL を伝えるだけ
+cd your-project
 claude
-> /setup /path/to/your-project
+> spec-know-how を導入して。GitHub: https://github.com/ishimori/spec-know-how.git
 ```
+
+dd-know-how も自動的に GitHub から取得・導入されます。ローカルに clone する必要はありません。
 
 ## 実績
 
@@ -72,7 +74,7 @@ spec-know-how/
 
 ## 関連プロジェクト
 
-- [dd-know-how](https://github.com/xxx/dd-know-how) — DD 設計書管理・DA 批判レビュー・開発フロー（**必須依存**）
+- [dd-know-how](https://github.com/ishimori/dd-know-how) — DD 設計書管理・DA 批判レビュー・開発フロー（**必須依存・自動導入**）
 
 ## ライセンス
 

@@ -16,19 +16,71 @@
 
 **dd-know-how（Level 2 以上）が必須です。**
 
-spec-know-how は DD を起票・管理するオーケストレーターであり、DD の実体管理は dd-know-how が担います。まだ導入していない場合は、先に dd-know-how を導入してください。
-
-```bash
-# dd-know-how の導入（まだの場合）
-cd dd-know-how
-claude
-> /setup /path/to/your-project
-# → Level 2（標準）以上を選択
-```
+spec-know-how は DD を起票・管理するオーケストレーターであり、DD の実体管理は dd-know-how が担います。下記のセットアップ方法はいずれも dd-know-how を自動的に導入します。
 
 ## セットアップ
 
-### 方法1: /setup コマンド（推奨）
+### 方法 1: ブートストラップ（推奨 — リポジトリ不要）
+
+対象プロジェクト内で Claude Code を起動し、以下を依頼するだけで導入できます。
+**spec-know-how / dd-know-how のローカル clone は不要です。**
+
+```bash
+cd your-project
+claude
+```
+
+```
+spec-know-how を導入して。
+GitHub: https://github.com/ishimori/spec-know-how.git
+```
+
+Claude が以下を自動実行します:
+
+1. `tmp/_spec-know-how` と `tmp/_dd-know-how` を GitHub から shallow clone
+2. dd-know-how Level 2（DD管理 + DA批判レビュー）を導入
+3. spec-know-how（SKILL.md + 参照資料）を導入
+4. CLAUDE.md にバージョン・設定を追記
+5. `tmp/` を削除してクリーンアップ
+
+> **仕組み**: Claude は IMPORT.md の手順を読み取って実行します。
+> `/setup` スキルがなくても、この手順を依頼すれば動作します。
+
+#### ブートストラップ手順（Claude が実行する内容）
+
+```bash
+# 1. 一時ディレクトリに clone
+mkdir -p tmp
+git clone --depth 1 https://github.com/ishimori/spec-know-how.git tmp/_spec-know-how
+git clone --depth 1 https://github.com/ishimori/dd-know-how.git   tmp/_dd-know-how
+
+# 2. dd-know-how Level 2 を導入
+mkdir -p doc/DD doc/templates doc/archived/DD
+cp tmp/_dd-know-how/templates/dd_template.md       doc/templates/
+cp tmp/_dd-know-how/rules/dd-basic-rules.md        doc/templates/
+mkdir -p .claude/skills/dd .claude/skills/workflow
+cp tmp/_dd-know-how/.claude/skills/dd/SKILL.md       .claude/skills/dd/
+cp tmp/_dd-know-how/.claude/skills/workflow/SKILL.md .claude/skills/workflow/
+
+# 3. spec-know-how を導入
+mkdir -p .claude/skills/spec-know-how
+cp tmp/_spec-know-how/SKILL.md .claude/skills/spec-know-how/
+mkdir -p doc/spec-know-how/references
+cp -r tmp/_spec-know-how/references/design   doc/spec-know-how/references/
+cp -r tmp/_spec-know-how/references/examples doc/spec-know-how/references/
+
+# 4. 成果物フォルダ
+mkdir -p doc/spec/business-logic doc/spec/nfr doc/spec/uxm
+
+# 5. クリーンアップ
+rm -rf tmp/_spec-know-how tmp/_dd-know-how
+rmdir tmp 2>/dev/null
+
+# 6. .gitignore に tmp/ を追加（安全策）
+grep -q '^tmp/' .gitignore 2>/dev/null || echo 'tmp/' >> .gitignore
+```
+
+### 方法 2: /setup コマンド（spec-know-how がローカルにある場合）
 
 spec-know-how リポジトリ内で Claude Code を起動し、対象プロジェクトを指定:
 
@@ -38,7 +90,7 @@ claude
 > /setup /path/to/your-project
 ```
 
-dd-know-how が未導入であれば自動的に検出し、先にセットアップを案内します。
+dd-know-how が未導入であれば、ローカル探索 → GitHub clone の順で自動導入します。
 
 ### 方法2: 手動セットアップ
 
