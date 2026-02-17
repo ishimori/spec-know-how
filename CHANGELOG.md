@@ -2,31 +2,75 @@
 
 spec-know-how のバージョン履歴。[Semantic Versioning](https://semver.org/) に準拠。
 
+## [v0.3.0] — 2026-02-17
+
+### DD 番号体系の改正（完了）
+
+✅ **改正内容**: `DD-05, DD-10, ...` から **`DD-001, DD-002, ...`** へ（連番化）
+- テンプレートファイル: 全 12 個 rename 完了
+- SKILL.md: DD テーブル更新完了
+- 既存実装例（DD-40 → DD-008）: rename 完了
+
+### ファイル名の日本語化（完了）
+
+✅ **テンプレート**: `05_portfolio_index.md` → `001_ポートフォリオインデックス.md`
+✅ **DD ファイル**: `DD-40_stage4_machine_tools.md` → `DD-008_機械ツール設計.md`
+✅ **フォルダ**: `DD-40` → `DD-008`
+
+**実装詳細**:
+```
+templates/spec-know-how/
+  001_ポートフォリオインデックス.md
+  002_定量棚卸し.md
+  003_分析スコープ.md
+  004_FR仕様抽出.md
+  005_データフロー抽出.md
+  006_状態管理抽出.md
+  007_エラー処理抽出.md
+  008_機械ツール設計.md
+  009_最終仕様.md
+  010_移行先設計.md
+  011_NFR総合レビュー.md
+  012_UI要件.md
+```
+
+### タスク追加ガイドラインの導入
+
+⏳ **実装予定**: すべての DD テンプレートに「タスク追加ガイドライン」セクション追加
+
+### 配置ルール用語定義
+
+⏳ **実装予定**: SKILL.md に「用語定義」セクション追加
+
+**詳細**: [references/design/spec-know-how-improvements-v0.3.md](references/design/spec-know-how-improvements-v0.3.md)
+**DA 分析**: [references/design/spec-know-how-v0.3-da-review.md](references/design/spec-know-how-v0.3-da-review.md)
+
+---
+
 ## [v0.2.1] — 2026-02-17
 
-### セットアップドキュメント改善
+### 成果物配置ポリシーの明確化（重要バグ修正）
 
-#### 変更
+**問題**: DD テンプレートに成果物配置先が「相対パス」で記載されており、対象プロジェクト側に成果物が配置されるバグを発見。
 
-- **IMPORT.md**:
-  - **Step 5**: CLAUDE.md への記載内容を拡充
-    - 前提条件（dd-know-how Level 2 以上）の明記
-    - 成果物フォルダの詳細説明（business-logic, nfr, uxm, machine-facts）
-    - 導入済みスキル一覧表を追加（セットアップ完了の確認用）
-  - **検証チェックリスト**: 検査項目を詳細化
-    - workflow スキルの確認
-    - 成果物フォルダの個別確認
-    - Claude Code の再起動確認
-  - **トラブルシューティング**: 解決手順を強化
-    - スキルが認識されない: Claude Code 完全再起動が必須であることを明記
-    - 各問題別の診断コマンド例を追加
-    - 成果物フォルダ確認手順を追加
+#### 修正内容
 
-#### 設計根拠
+- **SKILL.md**: 「成果物配置ポリシー」セクションを追加
+  - すべての DD 成果物は **spec-know-how 側に配置**
+  - 対象プロジェクト側には参照実装またはリンクのみ配置
+  - 既存ツール群がある場合は統合・ラッパーコード のみ配置
 
-1. 実運用で導入後に CLAUDE.md の更新漏れが発生した
-2. セットアップ完了時の確認項目が不足していた
-3. トラブルシューティング時の診断手順が曖昧だった
+- **テンプレート（40_stage4_machine_tools.md）**: 配置先を明確化
+  - 統合・ラッパーツール: spec-know-how 側 `tools/verify/`
+  - 機械抽出結果: spec-know-how 側 `doc/spec/machine-facts/`
+  - 対象プロジェクト側: 参照実装のみ
+
+#### 実装例での修正
+
+- DD-40 実装による成果物をすべて spec-know-how 側に配置
+  - `tools/verify/integrate_extracts.py`（統合ツール）
+  - `doc/spec/machine-facts/summary.json`（抽出結果）
+  - `DD-40/integrated-schema.md`（スキーマ仕様書）
 
 ---
 
