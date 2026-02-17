@@ -40,7 +40,28 @@ templates/spec-know-how/
 
 ### 配置ルール用語定義
 
-⏳ **実装予定**: SKILL.md に「用語定義」セクション追加
+✅ **実装完了**: SKILL.md に「用語定義」セクション追加（v0.2.1）
+
+### QA スキルの実装（NEW）
+
+✅ **QA スキル実装完了**
+- `.claude/skills/qa/SKILL.md` 作成
+- キーワード検索インデックス（`doc/spec/qa-keyword-index.json`）生成
+- IMPORT.md に qa スキルをブートストラップ対象に追加
+- SKILL.md の「参照資料」セクションを更新（qa を実装済みスキルとして追加）
+
+**機能**:
+- 仕様書（FR.md, NFR.md, UXM.md）からの高速キーワード検索
+- 機械抽出結果（summary.json）との突合検証
+- 信頼度判定付き QA 回答
+- 既存の qa-index.md との統合（28 項目の High 信頼度 Q&A）
+
+**使用例**:
+```
+/qa Mermaid ダイアグラムは何種類対応していますか？
+/qa Git ステータスの自動ポーリング間隔は？
+/qa セッション自動復元とは何ですか？
+```
 
 **詳細**: [references/design/spec-know-how-improvements-v0.3.md](references/design/spec-know-how-improvements-v0.3.md)
 **DA 分析**: [references/design/spec-know-how-v0.3-da-review.md](references/design/spec-know-how-v0.3-da-review.md)

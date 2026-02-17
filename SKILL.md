@@ -283,5 +283,7 @@ Stage 4（機械ツール設計）がスキップされた場合、機械裏付�
 | `references/design/` | 設計書（ベース思想、ワークフロー、DD連携、チェックリスト） |
 | `references/examples/` | 実行例（DD-002: ドキュメント棚卸し、DD-003: 業務ロジック仕様抽出） |
 | `references/methodology/` | 方法論・教訓（5ステップ抽出プロセス、44DD以上の経験からの教訓） |
-| `references/skills/` | 実装済みスキル例（verify, qa, workflow, dd, review, review-spec） |
+| `.claude/skills/spec-know-how/` | spec-know-how スキル本体 |
+| `.claude/skills/qa/` | QA スキル（仕様検索＋コード突合） |
+| `references/skills/` | 参考実装例（verify, review, review-spec） |
 | `references/background/` | 背景・思想（意思決定記録、DDテンプレート） |

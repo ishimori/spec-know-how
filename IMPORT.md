@@ -61,9 +61,11 @@ mkdir -p .claude/skills/dd .claude/skills/workflow
 cp tmp/_dd-know-how/.claude/skills/dd/SKILL.md       .claude/skills/dd/
 cp tmp/_dd-know-how/.claude/skills/workflow/SKILL.md .claude/skills/workflow/
 
-# 3. spec-know-how を導入
+# 3. spec-know-how と qa スキルを導入
 mkdir -p .claude/skills/spec-know-how
 cp tmp/_spec-know-how/SKILL.md .claude/skills/spec-know-how/
+mkdir -p .claude/skills/qa
+cp tmp/_spec-know-how/.claude/skills/qa/SKILL.md .claude/skills/qa/
 mkdir -p doc/spec-know-how/references
 cp -r tmp/_spec-know-how/references/design   doc/spec-know-how/references/
 cp -r tmp/_spec-know-how/references/examples doc/spec-know-how/references/

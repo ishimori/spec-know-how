@@ -1,0 +1,267 @@
+{
+  "metadata": {
+    "title": "QA キーワード検索インデックス",
+    "generated": "2026-02-17T20:00:00Z",
+    "target_project": "C:\\repo\\markdown-viewer",
+    "version": "1.0"
+  },
+  "index": {
+    "mermaid": {
+      "keywords": ["mermaid", "ダイアグラム", "図表", "flowchart", "sequence"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.1 Markdown & 図表レンダリング",
+          "line": 28,
+          "confidence": "High",
+          "content": "Mermaid 図表: フローチャート、シーケンス図、ER図、クラス図、状態図、円グラフ、ガントチャート（7種類）"
+        }
+      ],
+      "qa_index": {
+        "question": "Mermaid ダイアグラムは何種類対応していますか？",
+        "file": "doc/spec/qa-index.md",
+        "line": 25
+      }
+    },
+    "gfm_rendering": {
+      "keywords": ["gfm", "レンダリング", "markdown", "準拠"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.1 Markdown & 図表レンダリング",
+          "line": 28,
+          "confidence": "High",
+          "content": "GFM準拠レンダリング: GitHub Flavored Markdown 標準に準拠"
+        }
+      ]
+    },
+    "git_polling": {
+      "keywords": ["git", "ポーリング", "自動", "3秒", "間隔"],
+      "sources": [
+        {
+          "file": "doc/spec/nfr/NFR.md",
+          "section": "2.1 リアルタイム更新",
+          "line": 35,
+          "confidence": "High",
+          "content": "ポーリング間隔: 3秒。外部ツール（git add など）での変更も即座に反映"
+        }
+      ],
+      "qa_index": {
+        "question": "Git ステータスの自動ポーリング間隔は何秒ですか？",
+        "file": "doc/spec/qa-index.md",
+        "line": 85
+      }
+    },
+    "outline_feature": {
+      "keywords": ["outline", "アウトライン", "目次", "見出し", "h1", "h6"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.3 検索 & ナビゲーション",
+          "line": 46,
+          "confidence": "High",
+          "content": "アウトライン（目次）: 見出し H1～H6 のツリー表示、クリックでジャンプ"
+        }
+      ],
+      "qa_index": {
+        "question": "アウトライン機能とは何ですか？",
+        "file": "doc/spec/qa-index.md",
+        "line": 72
+      }
+    },
+    "bookmark": {
+      "keywords": ["bookmark", "ブックマーク", "登録", "⭐"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.3 検索 & ナビゲーション",
+          "line": 47,
+          "confidence": "High",
+          "content": "ブックマーク機能: Ctrl+B で登録、最近アクセス日時順に表示"
+        }
+      ],
+      "qa_index": {
+        "question": "ブックマーク機能の基本操作は？",
+        "file": "doc/spec/qa-index.md",
+        "line": 58
+      }
+    },
+    "json_format": {
+      "keywords": ["json", "tree", "tree view", "table", "code view"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.4 複数フォーマット対応",
+          "line": 54,
+          "confidence": "High",
+          "content": "JSON: ツリービュー⇔コードビュー切替、配列は自動テーブル表示"
+        }
+      ],
+      "qa_index": {
+        "question": "JSON ファイルはどのように表示されますか？",
+        "file": "doc/spec/qa-index.md",
+        "line": 36
+      }
+    },
+    "html_preview": {
+      "keywords": ["html", "live server", "preview", "port", "5500"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.4 複数フォーマット対応",
+          "line": 58,
+          "confidence": "High",
+          "content": "HTML: VSCode Live Server 自動検出（ポート 5500-5510）、自動フォールバック"
+        }
+      ],
+      "qa_index": {
+        "question": "HTML ファイルの表示方式は？",
+        "file": "doc/spec/qa-index.md",
+        "line": 47
+      }
+    },
+    "git_status": {
+      "keywords": ["git status", "modified", "added", "untracked", "ステータス"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.5 Git 統合機能",
+          "line": 65,
+          "confidence": "High",
+          "content": "ファイルツリー Git ステータス: Modified / Added / Untracked を色付きドット表示"
+        }
+      ],
+      "qa_index": {
+        "question": "Git ステータス表示の種別は何ですか？",
+        "file": "doc/spec/qa-index.md",
+        "line": 96
+      }
+    },
+    "zoom_operation": {
+      "keywords": ["zoom", "ズーム", "ctrl++", "ctrl+-", "ctrl+0"],
+      "sources": [
+        {
+          "file": "doc/spec/uxm/UXM.md",
+          "section": "1.4 表示・編集",
+          "line": 43,
+          "confidence": "High",
+          "content": "Ctrl++ (ズームイン), Ctrl+- (ズームアウト), Ctrl+0 (リセット)"
+        }
+      ],
+      "qa_index": {
+        "question": "ズーム操作のキーボードショートカットは？",
+        "file": "doc/spec/qa-index.md",
+        "line": 177
+      }
+    },
+    "rendering_cache": {
+      "keywords": ["cache", "キャッシング", "レンダリング", "高速"],
+      "sources": [
+        {
+          "file": "doc/spec/nfr/NFR.md",
+          "section": "1.1 キャッシング戦略",
+          "line": 17,
+          "confidence": "High",
+          "content": "レンダリングキャッシュ: Markdown -> HTML 変換結果をメモリキャッシュ"
+        }
+      ],
+      "qa_index": {
+        "question": "レンダリングキャッシュとは何ですか？",
+        "file": "doc/spec/qa-index.md",
+        "line": 123
+      }
+    },
+    "session_restore": {
+      "keywords": ["session", "セッション", "復元", "自動復元", "タブ"],
+      "sources": [
+        {
+          "file": "doc/spec/nfr/NFR.md",
+          "section": "4.1 セッション管理",
+          "line": 88,
+          "confidence": "High",
+          "content": "セッション自動復元: タブ、スクロール位置、ウィンドウ位置を自動保存・復元"
+        }
+      ],
+      "qa_index": {
+        "question": "セッション自動復元とは何ですか？",
+        "file": "doc/spec/qa-index.md",
+        "line": 134
+      }
+    },
+    "search_shortcut": {
+      "keywords": ["search", "検索", "ctrl+f", "全文検索"],
+      "sources": [
+        {
+          "file": "doc/spec/uxm/UXM.md",
+          "section": "1.2 検索・ナビゲーション",
+          "line": 26,
+          "confidence": "High",
+          "content": "Ctrl+F: 検索パネルを開く"
+        }
+      ],
+      "qa_index": {
+        "question": "全文検索のキーボードショートカットは？",
+        "file": "doc/spec/qa-index.md",
+        "line": 150
+      }
+    },
+    "recent_files": {
+      "keywords": ["recent", "最近", "recent files", "ctrl+h"],
+      "sources": [
+        {
+          "file": "doc/spec/uxm/UXM.md",
+          "section": "1.2 検索・ナビゲーション",
+          "line": 28,
+          "confidence": "High",
+          "content": "Ctrl+H: 最近開いたファイル表示。直近10件まで記録"
+        }
+      ],
+      "qa_index": {
+        "question": "最近開いたファイルの表示方法は？",
+        "file": "doc/spec/qa-index.md",
+        "line": 161
+      }
+    },
+    "tab_management": {
+      "keywords": ["tab", "タブ", "複数フォルダ", "並べ替え"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.2 ファイル管理・UI",
+          "line": 37,
+          "confidence": "High",
+          "content": "タブ管理: 複数フォルダを同時に開く、ドラッグで並べ替え可能"
+        }
+      ],
+      "qa_index": {
+        "question": "タブ管理の操作は？",
+        "file": "doc/spec/qa-index.md",
+        "line": 193
+      }
+    },
+    "full_text_search": {
+      "keywords": ["and", "or", "regex", "正規表現", "ファイル名検索"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.3 検索 & ナビゲーション",
+          "line": 44,
+          "confidence": "High",
+          "content": "全文検索: AND/OR/正規表現対応、ファイル名検索"
+        }
+      ]
+    },
+    "syntax_highlight": {
+      "keywords": ["highlight", "シンタックス", "コードブロック", "highlight.js"],
+      "sources": [
+        {
+          "file": "doc/spec/business-logic/FR.md",
+          "section": "2.1 Markdown & 図表レンダリング",
+          "line": 30,
+          "confidence": "High",
+          "content": "コードブロックハイライト: highlight.js によるシンタックスハイライト対応"
+        }
+      ]
+    }
+  }
+}
