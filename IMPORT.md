@@ -153,10 +153,24 @@ cp -r spec-know-how/references/background    doc/spec-know-how/references/
 ## 仕様抽出（spec-know-how）
 
 - **スキル**: `/spec-know-how` — レガシーコードからの仕様抽出ワークフロー
+- **前提条件**: dd-know-how（Level 2 以上）必須
 - **DD テンプレート**: `doc/templates/spec-know-how/`（12 種）
 - **参照資料**: `doc/spec-know-how/references/`
 - **信頼度ルール**: High / Medium / Low / Conflicting（4段階）
+- **成果物フォルダ**:
+  - `doc/spec/business-logic/` — FR（機能要件）の仕様書
+  - `doc/spec/nfr/` — NFR（非機能要件）の仕様書
+  - `doc/spec/uxm/` — UI操作モデルの仕様書
+  - `doc/spec/machine-facts/` — 機械抽出結果
 - **QA応答要件**: 回答 + 信頼度 + 根拠行 + コミットSHA + 生成日時
+
+### 導入済みスキル
+
+| スキル | パス |
+|--------|------|
+| spec-know-how | `.claude/skills/spec-know-how/` |
+| dd | `.claude/skills/dd/` |
+| workflow | `.claude/skills/workflow/` |
 ```
 
 #### Step 6: 仕様抽出の成果物フォルダ作成
@@ -214,28 +228,61 @@ echo "- spec-know-how: abc1234 (v0.2.0)" >> your-project/CLAUDE.md
 ## 検証チェックリスト
 
 - [ ] dd-know-how が導入済み（`/dd list` が動作する）
+- [ ] workflow が導入済み（`/workflow` が認識される）
 - [ ] `.claude/skills/spec-know-how/SKILL.md` が配置されている
 - [ ] `doc/templates/spec-know-how/` に 12 テンプレートが存在する
-- [ ] `CLAUDE.md` に spec-know-how の設定が記載されている
-- [ ] `doc/spec/` フォルダが存在する
+- [ ] 必須の成果物フォルダが存在する:
+  - [ ] `doc/spec/business-logic/`
+  - [ ] `doc/spec/nfr/`
+  - [ ] `doc/spec/uxm/`
+  - [ ] `doc/spec/machine-facts/`
+- [ ] `CLAUDE.md` に以下が記載されている:
+  - [ ] 仕様抽出（spec-know-how）セクション
+  - [ ] 前提条件の説明
+  - [ ] 導入済みスキルの一覧表
 - [ ] 使用バージョンが `CLAUDE.md` に記録されている
+- [ ] Claude Code を再起動して `/spec-know-how` が利用可能になることを確認
 
 ## トラブルシューティング
 
 ### スキルが認識されない
 
-- `.claude/skills/spec-know-how/SKILL.md` の配置を確認
-- Claude Code を再起動
+1. `.claude/skills/spec-know-how/SKILL.md` の配置を確認
+   ```bash
+   ls -la .claude/skills/spec-know-how/SKILL.md
+   ```
+2. `.claude/skills/dd/SKILL.md` と `.claude/skills/workflow/SKILL.md` も存在することを確認
+3. **Claude Code を完全に再起動してください** — 起動時に スキルディレクトリをスキャンするため、再起動が必須です
+4. CLAUDE.md に仕様抽出（spec-know-how）セクションが記載されているか確認
 
 ### DD 起票ができない
 
 - dd-know-how が導入されているか確認（`/dd list` で動作確認）
 - dd-know-how の Level が 2 以上であることを確認
+- `doc/templates/` ディレクトリが存在し、`dd_template.md` が配置されているか確認
 
 ### DD テンプレートがない
 
 - `doc/templates/spec-know-how/` の存在を確認
-- 12 ファイルが揃っているか確認（portfolio_index, stage1〜5, post x3）
+- 12 ファイルが揃っているか確認:
+  ```bash
+  ls doc/templates/spec-know-how/ | wc -l  # 12 を出力すること
+  ```
+  - `05_portfolio_index.md`
+  - `10_stage1_quantitative_inventory.md`
+  - `15_stage2_analysis_scope.md`
+  - `20_stage3_fr_extraction.md`
+  - `25_stage3_dataflow_extraction.md`
+  - `30_stage3_state_management.md`
+  - （以下、その他の Stage・Post テンプレート）
+
+### 成果物フォルダが見つからない
+
+- `doc/spec/` 配下の以下フォルダが存在することを確認:
+  ```bash
+  ls -d doc/spec/{business-logic,nfr,uxm,machine-facts}
+  ```
+- 存在しない場合は、**Step 6** を再度実行してください
 
 ### 機械抽出ツールがない
 
