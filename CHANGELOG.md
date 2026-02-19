@@ -20,6 +20,11 @@ spec-know-how のバージョン履歴。[Semantic Versioning](https://semver.or
 - **README.md**: ステップ対応表に GUIDE_IMPL.md 列を追加（4系統対応）
 - **GUIDE.md**: 参考資料に GUIDE_IMPL.md を追加
 - **CLAUDE.md**: リポジトリ構造テーブルに GUIDE_IMPL.md を追加
+- **GUIDE_IMPL.md Step 1**: UI設計ガイドライン文書化 + CLAUDE.md 連携 + 編集可能テーブル PoC を追加
+- **GUIDE_IMPL.md Step 3**: コンポーネント反映サイクルを追加
+- **manuals/02 Step 1**: デザインガイドラインと LLM 連携（2.2.5）、Excel ライク入力表 PoC（2.2.6）を追加
+- **manuals/02 Step 3**: コンポーネント反映サイクル（4.2.4）を追加
+- **manuals/02**: Gate 1, Gate 3, 統合チェックリストにガイドライン・テーブル PoC・パターン反映の項目追加
 
 ---
 
