@@ -7,17 +7,40 @@
 
 ## 全体の流れ
 
-```
-Step 1: 対象を把握する          ← Gate 1
-Step 2: DB・データモデルを取得する ← Gate 2
-Step 3: 画面・UI を把握する      ← Gate 3
-Step 4: 業務ロジックを抽出する   ← Gate 4
-Step 5: 非機能要件を確認する     ← Gate 5
-Step 6: QA スキルを作る          ← Gate 6
+```mermaid
+flowchart LR
+    S1["Step 1\n対象を把握する"]
+    S2["Step 2\nDB・データモデル"]
+    S3["Step 3\n画面・UI"]
+    S4["Step 4\n業務ロジック"]
+    S5["Step 5\n非機能要件"]
+    S6["Step 6\nQA スキル"]
+
+    G1{Gate 1}
+    G2{Gate 2}
+    G3{Gate 3}
+    G4{Gate 4}
+    G5{Gate 5}
+    G6{Gate 6}
+
+    S1 --> G1 --> S2 & S3
+    S2 --> G2 --> S4
+    S3 --> G3 --> S4
+    S4 --> G4 --> S5
+    S5 --> G5 --> S6
+    S6 --> G6
+
+    style G1 fill:#f9f,stroke:#333
+    style G2 fill:#f9f,stroke:#333
+    style G3 fill:#f9f,stroke:#333
+    style G4 fill:#f9f,stroke:#333
+    style G5 fill:#f9f,stroke:#333
+    style G6 fill:#f9f,stroke:#333
 ```
 
-各 Step は順番に進む必要はありません。DB が先でも画面が先でも構いません。
-ただし、情報が揃っているかは Gate で確認してから次に進んでください。
+Step 2〜3 は並行して進められます。Gate で情報が揃っているか確認してから次に進んでください。
+
+> **注**: このガイドの Gate 1〜6 は `gates/` フォルダのチェックリストに対応します。`manuals/` 内にも各ステップに Gate がありますが、番号体系が異なります（マニュアルは独自の5ステップ構成）。
 
 ---
 
@@ -81,7 +104,7 @@ grep -r "class.*Model" src/ --include="*.py" -l
 
 コードではわからないことがある。できれば本番 DB のマスタデータダンプ（個人情報除外）を入手する。
 
-> **教訓**: マスタデータの具体値が不明なまま実装を進めると、識別子の不一致（日本語 vs 英語コード等）が後から横断バグとして現れる。詳細は [references/methodology/05_lessons_learned.md](references/methodology/05_lessons_learned.md) の「うまくいかなかった点 #2」を参照。
+> **教訓**: マスタデータの具体値が不明なまま実装を進めると、識別子の不一致（日本語 vs 英語コード等）が後から横断バグとして現れる。詳細は [references/lessons_learned.md](references/lessons_learned.md) の「うまくいかなかった点 #2」を参照。
 
 ### ポイント
 
@@ -115,7 +138,7 @@ grep -r "class.*Model" src/ --include="*.py" -l
 - どのロールがどの画面を見られるか
 - 同じ画面でもロールによって表示項目が変わる場合はその条件を把握する
 
-> **教訓**: 画面仕様を抽出するとき、「画面の機能（何ができるか）」と「UIの構成（どう見せるか）」を分けて記録する。フレームワーク移行の場合、前者は忠実に移植し、後者は移行先に合わせて再設計するのが正しい。詳細は [references/methodology/05_lessons_learned.md](references/methodology/05_lessons_learned.md) の「気付き #8」を参照。
+> **教訓**: 画面仕様を抽出するとき、「画面の機能（何ができるか）」と「UIの構成（どう見せるか）」を分けて記録する。フレームワーク移行の場合、前者は忠実に移植し、後者は移行先に合わせて再設計するのが正しい。詳細は [references/lessons_learned.md](references/lessons_learned.md) の「気付き #8」を参照。
 
 ### ポイント
 
@@ -155,9 +178,8 @@ grep -r "class.*Model" src/ --include="*.py" -l
 **コードと仕様を突合する（できる場合）**
 
 仕様書の記述とコードを照合して信頼度を上げる。AST 解析や Grep による機械的な突合が有効。
-参考: [references/skills/verify_SKILL.md](references/skills/verify_SKILL.md)
 
-> **教訓**: 「計算ロジック」だけが業務ロジックではない。UI 層の submit/save 関数に埋まったバリデーション 12 条件が丸ごと見落とされたケースがある。詳細は [references/methodology/05_lessons_learned.md](references/methodology/05_lessons_learned.md) の「気付き #7」を参照。
+> **教訓**: 「計算ロジック」だけが業務ロジックではない。UI 層の submit/save 関数に埋まったバリデーション 12 条件が丸ごと見落とされたケースがある。詳細は [references/lessons_learned.md](references/lessons_learned.md) の「気付き #7」を参照。
 
 ### ポイント
 
@@ -209,8 +231,6 @@ grep -r "class.*Model" src/ --include="*.py" -l
 
 | 資料 | 内容 |
 |------|------|
-| [references/examples/](references/examples/) | 実際の仕様抽出 DD（実績例） |
-| [references/methodology/05_lessons_learned.md](references/methodology/05_lessons_learned.md) | 44DD 以上の実践から得た教訓 |
-| [references/design/01_foundation.md](references/design/01_foundation.md) | FR/NFR/信頼度の基本概念 |
-| [references/skills/qa_SKILL.md](references/skills/qa_SKILL.md) | QA スキルの実装例 |
-| [references/skills/verify_SKILL.md](references/skills/verify_SKILL.md) | コード突合スキルの実装例 |
+| [references/lessons_learned.md](references/lessons_learned.md) | 44DD 以上の実践から得た教訓 |
+| [manuals/](manuals/) | 包括マニュアル（「なぜ・どうやるか」の詳細 + ゲート + アンチパターン） |
+| [how-to/qa-skill.md](how-to/qa-skill.md) | QA スキルの作り方 |

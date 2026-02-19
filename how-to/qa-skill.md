@@ -20,7 +20,7 @@ QA スキルは `/qa <質問>` のように呼び出すと、仕様書を参照�
 - 仕様問い合わせへの即答
 - 移行・改修時の影響範囲確認
 
-> **教訓**: QA スキル自体に「賢さ」は不要。仕様書の構造が良ければ、シンプルな検索・引用で高精度な回答ができる。性能を決めるのはスキルではなく仕様書の質。（[参考: lessons_learned #5](../references/methodology/05_lessons_learned.md)）
+> **教訓**: QA スキル自体に「賢さ」は不要。仕様書の構造が良ければ、シンプルな検索・引用で高精度な回答ができる。性能を決めるのはスキルではなく仕様書の質。（[参考: lessons_learned #5](../references/lessons_learned.md)）
 
 ---
 
@@ -72,7 +72,7 @@ your-project/
 
 プロジェクトの `.claude/skills/qa/SKILL.md` を作成します。
 
-**テンプレート**（実装例は [../references/skills/qa_SKILL.md](../references/skills/qa_SKILL.md) を参照）:
+**テンプレート**:
 
 ```markdown
 ---
@@ -109,7 +109,7 @@ description: 仕様書からの回答検索
 **質問**: {質問}
 **参照先**: {仕様書ファイルパス}
 **回答**: {仕様書に基づく回答}
-**信頼度**: {High / Medium / Low}
+**信頼度**: {High / Medium / Low / Conflicting}
 ```
 
 ### Step 4: 動作確認
@@ -127,7 +127,7 @@ description: 仕様書からの回答検索
 
 仕様書の記述をコードで裏付ける「突合機能」を追加することで、信頼度を上げられます。
 
-実装例: [../references/skills/verify_SKILL.md](../references/skills/verify_SKILL.md)
+AST 解析や Grep による機械的な突合が有効です。言語に応じたツール（Python なら `ast` モジュール等）を活用してください。
 
 ```markdown
 ### Step 3（オプション）: コードで検証

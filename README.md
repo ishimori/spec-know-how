@@ -14,7 +14,7 @@
 | [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
 | [gates/](gates/) | 各ステップの通過基準チェックリスト。「次に進んでいいか」を人間が判断するために使う |
 | [how-to/qa-skill.md](how-to/qa-skill.md) | プロジェクト固有の QA スキルの作り方 |
-| [references/](references/) | 実績例・教訓・スキル実装例（参考資料） |
+| [references/](references/) | 教訓（44DD以上の実践から得た知見） |
 
 ### GUIDE.md と manuals/ の役割分担
 
@@ -60,10 +60,7 @@ spec-know-how/
 ├── how-to/
 │   └── qa-skill.md               # QA スキルの作り方
 └── references/
-    ├── design/                   # 概念資料（FR/NFR/信頼度）
-    ├── examples/                 # 実行例（実際の DD）
-    ├── methodology/              # 教訓（44DD以上の経験）
-    └── skills/                   # スキル実装例（qa, verify）
+    └── lessons_learned.md        # 教訓（44DD以上の経験）
 ```
 
 ---
@@ -74,9 +71,7 @@ spec-know-how/
 
 - 約 4,300 行のビジネスロジックを仕様書化
 - 195+ 項目をコードと突合して検証
-- 44 DD 以上の経験から得た教訓を [references/methodology/](references/methodology/) にまとめ
-
-詳細は [references/examples/](references/examples/) を参照。
+- 44 DD 以上の経験から得た教訓を [references/lessons_learned.md](references/lessons_learned.md) にまとめ
 
 ---
 

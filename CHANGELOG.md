@@ -2,6 +2,36 @@
 
 spec-know-how のバージョン履歴。[Semantic Versioning](https://semver.org/) に準拠。
 
+## [v0.5.0] — 2026-02-19
+
+### 全体調和レビュー — 初見者向け整理
+
+#### 削除
+
+- **references/design/** 全3ファイル: v0.1時代の設計思想（manuals + GUIDE に吸収済み）
+- **references/examples/** 全2ファイル: プロジェクト固有のDD実行例（manuals が汎用的にカバー）
+- **references/skills/** 全2ファイル: プロジェクト固有のスキル実装例（how-to が作り方をカバー）
+
+#### 変更
+
+- **references/methodology/05_lessons_learned.md** → **references/lessons_learned.md** に移動
+  - references/ は教訓1ファイルのみのシンプルな構成に
+- **GUIDE.md**: mermaid フローチャートを追加（Step 2-3 の並行可能性を可視化）
+- **CLAUDE.md**: 信頼度ラベルを2層構造に整理
+  - 仕様書ドキュメント単位: `[VERIFIED]` / `[DRAFT]`
+  - 個別仕様項目単位: `High` / `Medium` / `Low` / `Conflicting`
+- **README.md**: 構成図・リンクを新しいファイル構成に合わせて更新
+- **how-to/qa-skill.md**: 削除ファイルへのリンクを修正
+
+#### 整理の背景
+
+DD-062-2 でマニュアルを投入した後、初見者の視点でリポジトリ全体を評価。
+v0.1〜v0.3 の方針転換で残った旧コンテンツ（design/, examples/, skills/）は
+manuals + GUIDE + how-to に吸収済みであり、新規読者には冗長だった。
+Git 履歴で辿れるため削除し、導線をシンプルにした。
+
+---
+
 ## [v0.4.0] — 2026-02-19
 
 ### 実践マニュアル追加 — 仕様抽出から実装までの包括ガイド

@@ -15,12 +15,21 @@
 | `CHANGELOG.md` | バージョン履歴 |
 | `gates/` | ゲートチェックリスト（6種） |
 | `how-to/` | QAスキルの作り方など |
-| `references/design/` | 基本概念（FR/NFR/信頼度）、チェックリスト素材 |
-| `references/examples/` | 実行例（DD-002: ドキュメント棚卸し、DD-003: 業務ロジック仕様抽出） |
-| `references/methodology/` | 教訓（44DD以上の経験） |
-| `references/skills/` | スキル実装例（qa, verify） |
+| `references/lessons_learned.md` | 教訓（44DD以上の経験） |
 
-## 信頼度の 4 段階
+## 信頼度ラベル
+
+2つのレベルで信頼度を管理する。
+
+### 仕様書ドキュメント単位
+
+| ラベル | 意味 |
+|--------|------|
+| `[VERIFIED]` | コードと突合検証済み。そのまま信頼してよい |
+| `[DRAFT]` | 一部検証済み、一部推測あり。使う前に追加検証が必要 |
+| `[UNVERIFIED]` | 構造は把握できるが内容の正確性は未保証。目次・構造参照用 |
+
+### 個別の仕様項目・主張単位
 
 | 信頼度 | 意味 |
 |--------|------|
@@ -32,4 +41,4 @@
 ## メンテナンス方針
 
 - バージョンアップ時は `CHANGELOG.md` に記録する
-- ゲートや手順の改善は実績から得た教訓を `references/methodology/05_lessons_learned.md` に追記し、`GUIDE.md` や `gates/` に反映する
+- ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE.md` や `gates/` に反映する
