@@ -1,118 +1,107 @@
 # spec-know-how
 
-**レガシーコードベースから仕様を抽出・検証し、信頼度付きの知識基盤を構築するオーケストレーションスキル**
-
-Claude Code のスキルとして動作し、既存システムのソースコードから業務仕様を体系的に抽出します。
+**レガシーシステムのリエンジニアリング（仕様抽出 → 実装）のための実践ガイド集**
 
 ---
 
-## 使い方
+## なぜこのリポジトリが必要か
 
-### Step 1: プロジェクトを作成し、スキルを導入する
+LLM（Claude Code 等）を使えばコードは速く書ける。しかし「何を作るべきか」を正しく伝えられなければ、速く間違ったものが出来上がるだけです。
 
-```bash
-mkdir my-new-project && cd my-new-project
-git init
-claude
-```
+レガシーシステムの作り直しでは、この問題が特に深刻になります:
 
-```
-https://github.com/ishimori/spec-know-how から spec-know-how を導入して
-```
+- **仕様書がない**（あっても古い）。LLM に「この仕様で作って」と言えない
+- **コードに埋まった業務ルール**を見落とし、移行後に「前はできたのに」が頻発する
+- **LLM の出力を検証する基準がない**。「動いているから正しい」で進めてしまう
+- **作業の進め方が属人的**。何から手をつけ、どこまでやれば十分かの判断基準がない
 
-Claude が spec-know-how と dd-know-how を自動的にセットアップします。
-
-### Step 2: 仕様抽出を開始する
-
-```
-/path/to/legacy-system の仕様を抽出して
-```
-
-spec-know-how が **12 DD を一括作成** し、Stage 1（定量棚卸し）を即座に開始します。
-以降は DD 内のタスクに従って自動的に進行します。
-
-### Step 3: 結果を確認する
-
-抽出された仕様は `doc/spec/` に、進捗はポートフォリオインデックス DD で確認できます。
-
-```
-doc/spec/
-├── business-logic/   # 業務ロジック仕様
-├── nfr/              # 非機能要件仕様
-├── uxm/              # UI操作モデル仕様
-└── machine-facts/    # 機械抽出結果
-```
+このリポジトリは、44DD（Design Decision）以上の実プロジェクト経験から抽出した**手順・判断基準・失敗パターン**を提供します。LLM を「速く書くツール」から「正しく作り直すパートナー」に変えるためのガイドです。
 
 ---
 
-## 解決する問題
+## この参考書でできること
 
-| 問題 | 結果 |
-|------|------|
-| **仕様書がない** | コードにしか存在しない業務ルールを構造化して文書化する |
-| **LLM の解釈頼み** | 機械抽出ツールと突合し、根拠のない仕様を排除する |
-| **信頼度が不明** | 全ての仕様項目に 4 段階の信頼度（High/Medium/Low/Conflicting）を付与する |
-| **NFR が後回し** | FR/NFR を独立トラックで管理し、非機能要件の抜けを防ぐ |
-| **QA で根拠が出ない** | 回答には必ず根拠（コード行/仕様書）と信頼度を付記する |
+| コンテンツ | 内容 |
+|-----------|------|
+| [GUIDE.md](GUIDE.md) | **仕様抽出**のクイックリファレンス（Step 1〜6）。どこから始めて何を把握すればいいかを示す |
+| [GUIDE_IMPL.md](GUIDE_IMPL.md) | **実装**のクイックリファレンス（Step 1〜5）。仕様書完成後、どう作り直すかを示す |
+| [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
+| [gates/](gates/) | 各ステップの通過基準チェックリスト。「次に進んでいいか」を人間が判断するために使う |
+| [sample_prompts/](sample_prompts/) | 各ステップの DD 起票用サンプルプロンプト。コピペして Claude に渡す |
+| [how-to/qa-skill.md](how-to/qa-skill.md) | プロジェクト固有の QA スキルの作り方 |
+| [references/](references/) | 教訓（44DD以上の実践から得た知見） |
 
-## 仕組み（v0.2）
+### クイックリファレンスとマニュアルの役割分担
 
-起動すると **12 DD を一括作成** し、構造の中で判断する。
+|  | クイックリファレンス | 包括マニュアル |
+|--|-------------------|--------------|
+| **仕様抽出**（コードを書く前） | [GUIDE.md](GUIDE.md) | [manuals/01](manuals/01_仕様書作成マニュアル.md) |
+| **実装**（コードを書く） | [GUIDE_IMPL.md](GUIDE_IMPL.md) | [manuals/02](manuals/02_実装マニュアル.md) |
 
-```
-Stage 1: 定量棚卸し     コードベースの全体像を定量把握
-Stage 2: 分析スコープ   広さと深さを決定、スキップ判定
-Stage 3: 仕様抽出       FR・データフロー・状態管理・エラー処理（並列可）
-Stage 4: 機械ツール設計 自動抽出ツールの設計・作成
-Stage 5: 最終仕様       Stage 3 + 4 を突合、信頼度付与
-Post:    移行先設計 / NFR総合レビュー / UI要件
-```
+- **クイックリファレンス** = 「何をするか」のチェックリスト形式。手を動かしながら見る
+- **包括マニュアル** = 「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン。判断に迷ったとき読む
 
-不要な DD は作成はされますが、DD 内でスキップ判定と理由が記録されます。
+---
 
-## 前提条件
+## 読者別の使い方
 
-**dd-know-how** が必須です。spec-know-how は DD（Design Document）を起票・管理するオーケストレーターであり、DD の実体管理は dd-know-how が担います。導入時に自動的にセットアップされます。
+### 開発者（コードを読む・書く人）
 
-## 導入方法の詳細
+1. [GUIDE.md](GUIDE.md) で仕様抽出の全体像を把握する
+2. Step ごとに作業を進め、終わったら該当の Gate でチェックする
+3. 情報が揃ったら [how-to/qa-skill.md](how-to/qa-skill.md) を参考に QA スキルを作る
+4. [GUIDE_IMPL.md](GUIDE_IMPL.md) で実装の全体像を把握し、構築に進む
 
-[IMPORT.md](IMPORT.md) を参照してください。3 つの方法があります:
+### プロジェクトリーダー・SA
 
-1. **ブートストラップ（推奨）** — GitHub URL を伝えるだけ
-2. **/setup コマンド** — spec-know-how がローカルにある場合
-3. **手動セットアップ** — ファイルを自分でコピー
+1. [GUIDE.md](GUIDE.md) + [GUIDE_IMPL.md](GUIDE_IMPL.md) でプロセス全体を把握する
+2. 各 Gate チェックリストを使って「次に進んでいいか」を確認する
+3. Gate が通過できていない場合は追加調査・修正を指示する
 
-## 実績
+---
 
-`housing-e-kintai-next`（Streamlit → React+FastAPI 移行プロジェクト）で実践:
-
-- **12 仕様書** / 約 4,300 行のビジネスロジックを抽出
-- **195+ 項目**を機械検証で突合、全 VERIFIED に昇格
-- **44 DD 以上**の経験から方法論を抽出・体系化
-
-詳細は [references/examples/](references/examples/) と [references/methodology/](references/methodology/) を参照。
-
-## フォルダ構成
+## 構成
 
 ```
 spec-know-how/
-├── SKILL.md              # スキル定義（メイン）
-├── CLAUDE.md             # AI 向け設定ファイル
-├── IMPORT.md             # 導入ガイド
-├── CHANGELOG.md          # バージョン履歴
-├── templates/
-│   └── spec-know-how/    # DD テンプレート群（12種）
-├── references/
-│   ├── design/           # 設計書（ベース思想、ワークフロー、チェックリスト）
-│   ├── examples/         # 実行例（DD-002, DD-003）
-│   ├── methodology/      # 方法論・教訓
-│   ├── skills/           # 実装済みスキル例（verify, qa 等）
-│   └── background/       # 背景・思想（意思決定記録）
+├── GUIDE.md                      # 仕様抽出クイックリファレンス（Step 1〜6）
+├── GUIDE_IMPL.md                 # 実装クイックリファレンス（Step 1〜5）
+├── manuals/                      # 実践マニュアル（包括ガイド）
+│   ├── 01_仕様書作成マニュアル.md # 仕様抽出の詳細手順・ゲート・アンチパターン
+│   └── 02_実装マニュアル.md       # 実装の詳細手順・ゲート・アンチパターン
+├── gates/                        # ゲートチェックリスト（6種）
+│   ├── README.md                 # ゲートの使い方
+│   ├── 01_initial_survey.md      # Gate 1: 初回調査
+│   ├── 02_database.md            # Gate 2: DB・データモデル
+│   ├── 03_screens.md             # Gate 3: 画面・UI
+│   ├── 04_business_logic.md      # Gate 4: 業務ロジック
+│   ├── 05_nfr.md                 # Gate 5: 非機能要件
+│   └── 06_qa_ready.md            # Gate 6: QA 準備完了
+├── sample_prompts/               # DD 起票用サンプルプロンプト（各ステップ対応）
+│   ├── README.md                 # 使い方
+│   ├── 01_initial_survey.md      # Gate 1 対応の DD 起票プロンプト
+│   ├── 02_database.md            # Gate 2 対応の DD 起票プロンプト
+│   ├── 03_screens.md             # Gate 3 対応の DD 起票プロンプト
+│   ├── 04_business_logic.md      # Gate 4 対応の DD 起票プロンプト
+│   ├── 05_nfr.md                 # Gate 5 対応の DD 起票プロンプト
+│   └── 06_qa_ready.md            # Gate 6 対応の DD 起票プロンプト
+├── how-to/
+│   └── qa-skill.md               # QA スキルの作り方
+└── references/
+    └── lessons_learned.md        # 教訓（44DD以上の経験）
 ```
 
-## 関連プロジェクト
+---
 
-- [dd-know-how](https://github.com/ishimori/dd-know-how) — DD 設計書管理・DA 批判レビュー・開発フロー（**必須依存・自動導入**）
+## 実績
+
+`housing-e-kintai-next`（Streamlit → React+FastAPI 移行）で実践:
+
+- 約 4,300 行のビジネスロジックを仕様書化
+- 195+ 項目をコードと突合して検証
+- 44 DD 以上の経験から得た教訓を [references/lessons_learned.md](references/lessons_learned.md) にまとめ
+
+---
 
 ## ライセンス
 
