@@ -27,6 +27,7 @@ LLM（Claude Code 等）を使えばコードは速く書ける。しかし「�
 | [GUIDE_IMPL.md](GUIDE_IMPL.md) | **実装**のクイックリファレンス（Step 1〜5）。仕様書完成後、どう作り直すかを示す |
 | [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
 | [gates/](gates/) | 各ステップの通過基準チェックリスト。「次に進んでいいか」を人間が判断するために使う |
+| [sample_prompts/](sample_prompts/) | 各ステップの DD 起票用サンプルプロンプト。コピペして Claude に渡す |
 | [how-to/qa-skill.md](how-to/qa-skill.md) | プロジェクト固有の QA スキルの作り方 |
 | [references/](references/) | 教訓（44DD以上の実践から得た知見） |
 
@@ -96,6 +97,14 @@ spec-know-how/
 │   ├── 04_business_logic.md      # Gate 4: 業務ロジック
 │   ├── 05_nfr.md                 # Gate 5: 非機能要件
 │   └── 06_qa_ready.md            # Gate 6: QA 準備完了
+├── sample_prompts/               # DD 起票用サンプルプロンプト（各ステップ対応）
+│   ├── README.md                 # 使い方
+│   ├── 01_initial_survey.md      # Gate 1 対応の DD 起票プロンプト
+│   ├── 02_database.md            # Gate 2 対応の DD 起票プロンプト
+│   ├── 03_screens.md             # Gate 3 対応の DD 起票プロンプト
+│   ├── 04_business_logic.md      # Gate 4 対応の DD 起票プロンプト
+│   ├── 05_nfr.md                 # Gate 5 対応の DD 起票プロンプト
+│   └── 06_qa_ready.md            # Gate 6 対応の DD 起票プロンプト
 ├── how-to/
 │   └── qa-skill.md               # QA スキルの作り方
 └── references/
