@@ -177,7 +177,7 @@ grep -r "class.*Model" src/ --include="*.py" -l
 
 **コードと仕様を突合する（できる場合）**
 
-仕様書の記述とコードを照合して信頼度を上げる。AST 解析や Grep による機械的な突合が有効。
+仕様書の記述とコードを照合して信頼度を上げる。Python スクリプトによる AST 解析や Grep による機械的な突合が有効。詳細は [how-to/qa-skill.md](how-to/qa-skill.md) の「コード突合の追加」を参照。
 
 > **教訓**: 「計算ロジック」だけが業務ロジックではない。UI 層の submit/save 関数に埋まったバリデーション 12 条件が丸ごと見落とされたケースがある。詳細は [references/lessons_learned.md](references/lessons_learned.md) の「気付き #7」を参照。
 

@@ -23,6 +23,15 @@ spec-know-how のバージョン履歴。[Semantic Versioning](https://semver.or
 - **README.md**: 構成図・リンクを新しいファイル構成に合わせて更新
 - **how-to/qa-skill.md**: 削除ファイルへのリンクを修正
 
+#### DA 残件対応 + Python 推奨（追加）
+
+- **README.md**: GUIDE.md / manuals の3系統ステップ対応表を追加
+- **manuals/01, 02**: 関連リソースセクションを追加（GUIDE.md・gates/ への逆リンク）
+- **gates/ 全6ファイル**: DA 批判レビューチェック項目を追加
+- **how-to/qa-skill.md**: verify（コード突合）セクションを大幅拡充、Python を推奨言語として明示
+- **GUIDE.md**: Step 4 に Python スクリプトによる機械分析の推奨を追記
+- **CLAUDE.md**: 機械分析の推奨言語セクションを追加
+
 #### 整理の背景
 
 DD-062-2 でマニュアルを投入した後、初見者の視点でリポジトリ全体を評価。

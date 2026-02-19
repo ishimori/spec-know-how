@@ -123,19 +123,59 @@ description: 仕様書からの回答検索
 
 ---
 
-## カスタマイズ: コード突合の追加
+## カスタマイズ: コード突合の追加（verify 機能）
 
-仕様書の記述をコードで裏付ける「突合機能」を追加することで、信頼度を上げられます。
+仕様書の記述をコードで裏付ける「突合機能」を追加することで、信頼度を `High` に引き上げられます。
 
-AST 解析や Grep による機械的な突合が有効です。言語に応じたツール（Python なら `ast` モジュール等）を活用してください。
+### 推奨ツール: Python スクリプト
+
+機械的なコード分析には **Python** を推奨します。理由:
+
+- `ast` モジュールで Python コードの構造解析が標準ライブラリだけで可能
+- 他言語（JS/TS, Java 等）のパーサーも PyPI に豊富
+- Claude Code が `uv run python script.py` で即座に実行でき、小回りが利く
+- 分析結果を JSON/Markdown で出力し、仕様書と突合するパイプラインが組みやすい
+
+### 分析ツールの例
+
+**1. 関数・クラス構造の抽出（AST 解析）**
+
+```python
+import ast, json, sys
+
+def extract_functions(filepath):
+    with open(filepath) as f:
+        tree = ast.parse(f.read())
+    return [
+        {"name": node.name, "args": [a.arg for a in node.args.args], "lineno": node.lineno}
+        for node in ast.walk(tree)
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    ]
+
+if __name__ == "__main__":
+    print(json.dumps(extract_functions(sys.argv[1]), indent=2, ensure_ascii=False))
+```
+
+**2. データモデルの抽出**
+
+ORM のモデル定義（SQLAlchemy, Django 等）からテーブル名・カラム・型を抽出する。
+仕様書の DB 設計と突合して差分を検出する。
+
+**3. SQL クエリの抽出**
+
+コード内の SQL 文字列を検出し、依存テーブルを特定する。
+仕様書の依存マップと突合できる。
+
+### QA スキルへの組み込み方
 
 ```markdown
 ### Step 3（オプション）: コードで検証
-仕様書の記述を Grep/Read ツールでコードと照合し、一致・差異を報告する。
-
-- 一致: 信頼度 High
-- 差異あり: 差異の内容を報告
-- コードで未確認: 信頼度 Medium 以下
+1. Python スクリプトで対象コードを機械解析する
+2. 仕様書の記述と解析結果を突合する
+3. 突合結果を以下で報告:
+   - 一致: 信頼度 High
+   - 差異あり: 差異の内容を報告
+   - コードで未確認: 信頼度 Medium 以下
 ```
 
 ---
