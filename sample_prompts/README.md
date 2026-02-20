@@ -43,12 +43,13 @@ DD を小さく保つと、作業の進捗が見やすくなり、詰まった�
 
 | サンプルプロンプト | 対応 Gate |
 |-----------------|-----------|
-| [01_initial_survey.md](01_initial_survey.md) | [gates/01_initial_survey.md](../gates/01_initial_survey.md) |
-| [02_database.md](02_database.md) | [gates/02_database.md](../gates/02_database.md) |
-| [03_screens.md](03_screens.md) | [gates/03_screens.md](../gates/03_screens.md) |
-| [04_business_logic.md](04_business_logic.md) | [gates/04_business_logic.md](../gates/04_business_logic.md) |
-| [05_nfr.md](05_nfr.md) | [gates/05_nfr.md](../gates/05_nfr.md) |
-| [06_qa_ready.md](06_qa_ready.md) | [gates/06_qa_ready.md](../gates/06_qa_ready.md) |
+| [00_Claude初期設定.md](00_Claude初期設定.md) | [gates/00_initial_claude.md](../gates/00_initial_claude.md) |
+| [01_初回調査.md](01_初回調査.md) | [gates/01_initial_survey.md](../gates/01_initial_survey.md) |
+| [02_DBデータモデル.md](02_DBデータモデル.md) | [gates/02_database.md](../gates/02_database.md) |
+| [03_画面UI.md](03_画面UI.md) | [gates/03_screens.md](../gates/03_screens.md) |
+| [04_業務ロジック.md](04_業務ロジック.md) | [gates/04_business_logic.md](../gates/04_business_logic.md) |
+| [05_非機能要件.md](05_非機能要件.md) | [gates/05_nfr.md](../gates/05_nfr.md) |
+| [06_QA準備完了.md](06_QA準備完了.md) | [gates/06_qa_ready.md](../gates/06_qa_ready.md) |
 
 ## Gate 宣言 DD について
 
