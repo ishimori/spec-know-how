@@ -15,7 +15,8 @@
 | `GUIDE_IMPL.md` | 実装の手順書（Step 1〜5） |
 | `manuals/` | 包括マニュアル（仕様作成 + 実装） |
 | `CHANGELOG.md` | バージョン履歴 |
-| `gates/` | ゲートチェックリスト（6種） |
+| `sample_prompts/` | DD 起票プロンプト + Gate チェックリスト統合（6種） |
+| `gates/` | Gate チェックリスト参照用（内容は sample_prompts/ に統合済み） |
 | `how-to/` | QAスキルの作り方など |
 | `references/lessons_learned.md` | 教訓（44DD以上の経験） |
 
@@ -48,4 +49,4 @@ Claude Code が直接実行でき、標準ライブラリの `ast` モジュー�
 ## メンテナンス方針
 
 - バージョンアップ時は `CHANGELOG.md` に記録する
-- ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE.md` や `gates/` に反映する
+- ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE.md` や `sample_prompts/` に反映する

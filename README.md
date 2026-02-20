@@ -26,8 +26,8 @@ LLM（Claude Code 等）を使えばコードは速く書ける。しかし「�
 | [GUIDE.md](GUIDE.md) | **仕様抽出**のクイックリファレンス（Step 1〜6）。どこから始めて何を把握すればいいかを示す |
 | [GUIDE_IMPL.md](GUIDE_IMPL.md) | **実装**のクイックリファレンス（Step 1〜5）。仕様書完成後、どう作り直すかを示す |
 | [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
-| [gates/](gates/) | 各ステップの通過基準チェックリスト。「次に進んでいいか」を人間が判断するために使う |
-| [sample_prompts/](sample_prompts/) | 各ステップの DD 起票用サンプルプロンプト。コピペして Claude に渡す |
+| [sample_prompts/](sample_prompts/) | 各ステップの DD 起票用プロンプト + Gate チェックリストを統合。1ファイルで完結 |
+| [gates/](gates/) | 各ステップの通過基準チェックリスト（参照用。内容は sample_prompts/ に統合済み） |
 | [how-to/qa-skill.md](how-to/qa-skill.md) | プロジェクト固有の QA スキルの作り方 |
 | [references/](references/) | 教訓（44DD以上の実践から得た知見） |
 
@@ -69,8 +69,8 @@ spec-know-how/
 ├── manuals/                      # 実践マニュアル（包括ガイド）
 │   ├── 01_仕様書作成マニュアル.md # 仕様抽出の詳細手順・ゲート・アンチパターン
 │   └── 02_実装マニュアル.md       # 実装の詳細手順・ゲート・アンチパターン
-├── gates/                        # ゲートチェックリスト（6種）
-│   ├── README.md                 # ゲートの使い方
+├── gates/                        # ゲートチェックリスト（参照用。内容は sample_prompts/ に統合済み）
+│   ├── README.md                 # ゲートの使い方（移行案内あり）
 │   ├── 01_initial_survey.md      # Gate 1: 初回調査
 │   ├── 02_database.md            # Gate 2: DB・データモデル
 │   ├── 03_screens.md             # Gate 3: 画面・UI
