@@ -49,3 +49,17 @@ Claude Code が直接実行でき、標準ライブラリの `ast` モジュー�
 
 - バージョンアップ時は `CHANGELOG.md` に記録する
 - ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE.md` や `sample_prompts/` に反映する
+
+## インポートしたスキル
+
+| スキル | 説明 |
+|--------|------|
+| `/dd` | DD設計書の作成・参照・一覧・アーカイブ |
+
+### DD設定（/dd スキル用）
+
+- DDフォルダ: `doc/DD/`
+- アーカイブ: `doc/archived/DD/`
+- テンプレート: `templates/dd_template.md`
+
+インポートしたファイルの詳細は `IMPORTED.md` を参照。
