@@ -16,7 +16,6 @@
 | `manuals/` | 包括マニュアル（仕様作成 + 実装） |
 | `CHANGELOG.md` | バージョン履歴 |
 | `sample_prompts/` | DD 起票プロンプト + Gate チェックリスト統合（6種） |
-| `gates/` | Gate チェックリスト参照用（内容は sample_prompts/ に統合済み） |
 | `how-to/` | QAスキルの作り方など |
 | `references/lessons_learned.md` | 教訓（44DD以上の経験） |
 
