@@ -49,7 +49,8 @@ flowchart LR
 | [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
 | [doc/SP/](doc/SP/) | 各ステップの SP チケット（親・子・context・gate）。Claude に直接渡して実行する |
 | [how-to/qa-skill.md](how-to/qa-skill.md) | プロジェクト固有の QA スキルの作り方 |
-| [references/](references/) | 教訓（実プロジェクト経験から得た知見） |
+| [references/lessons_learned.md](references/lessons_learned.md) | 教訓（実プロジェクト経験から得た知見） |
+| [references/llm-pitfalls.md](references/llm-pitfalls.md) | LLM 生成コードを使う際に知っておきたい落とし穴と注意点 |
 
 ### クイックリファレンスとマニュアルの役割分担
 
@@ -100,7 +101,8 @@ spec-know-how/
 ├── how-to/
 │   └── qa-skill.md               # QA スキルの作り方
 └── references/
-    └── lessons_learned.md        # 教訓（実プロジェクト経験）
+    ├── lessons_learned.md        # 教訓（実プロジェクト経験）
+    └── llm-pitfalls.md           # LLM 生成コードの落とし穴と注意点
 ```
 
 ---
