@@ -11,9 +11,9 @@
 
 - **DD とは**: 作業タスクをチェックリスト形式で定義したドキュメント。Claude への指示と作業記録を兼ねる
 - **dd-know-how**: DD を作成・管理するスキル。未導入の場合は https://github.com/ishimori/dd-know-how を参照してセットアップしてください
-- **DD の作り方**: `sample_prompts/` のプロンプトをコピーして Claude に貼り付けると DD が作成される
+- **DD の作り方**: `doc/SP/SP-00N.md` を Claude に渡して作業を開始する（例: SP-001 なら「SP-001.md を読んで実行してください」と伝える）
 
-> **Gate の宣言も DD で**: 各 Gate の通過（「Gate 1 を通過した」という人間の意思決定）も DD として明示的に起票することを推奨します。作業の痕跡が残り、後から判断を追跡できます。詳細は `sample_prompts/` の各 Gate 宣言プロンプトを参照してください。
+> **Gate の宣言も DD で**: 各 Gate の通過（「Gate 1 を通過した」という人間の意思決定）も DD として明示的に起票することを推奨します。作業の痕跡が残り、後から判断を追跡できます。Gate チェックは `doc/SP/SP-00N-gate.md` が担当します。**Gate の通過判定（Go/No-Go）は人間が最終決定します。**
 
 ---
 
@@ -52,7 +52,7 @@ flowchart LR
 
 Step 2〜3 は並行して進められます。Gate で情報が揃っているか確認してから次に進んでください。
 
-> **注**: このガイドの Gate 1〜6 は `sample_prompts/` の各ファイルに統合されています。`manuals/` 内にも各ステップに Gate がありますが、番号体系が異なります（マニュアルは Step 0〜4 構成。Step 0 は移行判断の前提フェーズ）。
+> **注**: このガイドの Gate 1〜6 は `doc/SP/SP-00N-gate.md` が担当します。`manuals/` 内にも各ステップに Gate がありますが、番号体系が異なります（マニュアルは Step 0〜4 構成。Step 0 は移行判断の前提フェーズ）。
 
 ---
 
@@ -121,9 +121,9 @@ find . -name "*.py" | wc -l   # Pythonファイル数
 
 > **DA 批判レビュー推奨**: Step 1 完了後、「本当に全体像が把握できているか？見落としているサブシステムや外部連携はないか？」を批判的に問い直す。見落としがあると後続 Step に歪みが生じる。
 
-**DD 起票**: [sample_prompts/01_initial_survey.md](sample_prompts/01_initial_survey.md) のプロンプトを使って DD を作成してください。
+**SP チケット**: [doc/SP/SP-001.md](doc/SP/SP-001.md) を Claude に渡して作業を開始してください。
 
-**→ [Gate 1: 初回調査チェックリスト](sample_prompts/01_初回調査.md)**
+**→ [Gate 1: 初回調査チェック](doc/SP/SP-001-gate.md)**
 
 ---
 
@@ -166,9 +166,9 @@ grep -r "class.*Model" src/ --include="*.py" -l
 
 > **DA 批判レビュー推奨**: Step 2 完了後、「本当に主要テーブルを網羅しているか？マスタデータの具体値は把握できているか？」を批判的に問い直す。マスタデータの不明が後で横断バグを引き起こす。
 
-**DD 起票**: [sample_prompts/02_database.md](sample_prompts/02_database.md) のプロンプトを使って DD を作成してください。
+**SP チケット**: [doc/SP/SP-002.md](doc/SP/SP-002.md) を Claude に渡して作業を開始してください。
 
-**→ [Gate 2: DB情報取得チェックリスト](sample_prompts/02_DBデータモデル.md)**
+**→ [Gate 2: DB情報取得チェック](doc/SP/SP-002-gate.md)**
 
 ---
 
@@ -205,9 +205,9 @@ grep -r "class.*Model" src/ --include="*.py" -l
 
 > **DA 批判レビュー推奨**: Step 3 完了後、「権限・ロールによる表示分岐を全て把握したか？UI に埋まったビジネスロジックを見落としていないか？」を批判的に問い直す。見落とした UI 層ロジックは Step 4 で拾えないことがある。
 
-**DD 起票**: [sample_prompts/03_screens.md](sample_prompts/03_screens.md) のプロンプトを使って DD を作成してください。
+**SP チケット**: [doc/SP/SP-003.md](doc/SP/SP-003.md) を Claude に渡して作業を開始してください。
 
-**→ [Gate 3: 画面把握チェックリスト](sample_prompts/03_画面UI.md)**
+**→ [Gate 3: 画面把握チェック](doc/SP/SP-003-gate.md)**
 
 ---
 
@@ -253,9 +253,9 @@ grep -r "class.*Model" src/ --include="*.py" -l
 
 > **DA 批判レビュー推奨**: Step 4 完了後、「UI 層のバリデーション・submit 関数を見落としていないか？Conflicting 項目が残っていないか？信頼度 Low の項目をそのままにしていないか？」を批判的に問い直す。UI 層ロジックの見落としは実績上最も多い失敗パターン。
 
-**DD 起票**: [sample_prompts/04_business_logic.md](sample_prompts/04_business_logic.md) のプロンプトを使って DD を作成してください。
+**SP チケット**: [doc/SP/SP-004.md](doc/SP/SP-004.md) を Claude に渡して作業を開始してください。
 
-**→ [Gate 4: 業務ロジック抽出チェックリスト](sample_prompts/04_業務ロジック.md)**
+**→ [Gate 4: 業務ロジック抽出チェック](doc/SP/SP-004-gate.md)**
 
 ---
 
@@ -279,9 +279,9 @@ grep -r "class.*Model" src/ --include="*.py" -l
 
 > **DA 批判レビュー推奨**: Step 5 完了後、「認証・認可は画面レベルだけでなくデータレベルも確認したか？セキュリティ要件を「ある場合」で流していないか？」を批判的に問い直す。
 
-**DD 起票**: [sample_prompts/05_nfr.md](sample_prompts/05_nfr.md) のプロンプトを使って DD を作成してください。
+**SP チケット**: [doc/SP/SP-005.md](doc/SP/SP-005.md) を Claude に渡して作業を開始してください。
 
-**→ [Gate 5: 非機能要件確認チェックリスト](sample_prompts/05_非機能要件.md)**
+**→ [Gate 5: 非機能要件確認チェック](doc/SP/SP-005-gate.md)**
 
 ---
 
@@ -297,9 +297,9 @@ grep -r "class.*Model" src/ --include="*.py" -l
 
 > **DA 批判レビュー推奨**: Step 6 完了後、「QA スキルが答えられない質問はないか？信頼度 Low の項目が放置されていないか？仕様書の更新フローを決めずに終わっていないか？」を批判的に問い直す。
 
-**DD 起票**: [sample_prompts/06_qa_ready.md](sample_prompts/06_qa_ready.md) のプロンプトを使って DD を作成してください。
+**SP チケット**: [doc/SP/SP-006.md](doc/SP/SP-006.md) を Claude に渡して作業を開始してください。
 
-**→ [Gate 6: QA 準備完了チェックリスト](sample_prompts/06_QA準備完了.md)**
+**→ [Gate 6: QA 準備完了チェック](doc/SP/SP-006-gate.md)**
 
 ---
 

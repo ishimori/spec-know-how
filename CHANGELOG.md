@@ -2,6 +2,29 @@
 
 spec-know-how のバージョン履歴。[Semantic Versioning](https://semver.org/) に準拠。
 
+## [v0.7.0] — 2026-02-27
+
+### sample_prompts/ 廃止・SP チケット体系への一本化（DD-010）
+
+#### 削除
+
+- **sample_prompts/** フォルダ（8ファイル）を完全削除
+  - SP-001〜006 + SP gate チケットが同等以上の機能を提供するため廃止
+  - DD-001 Phase 4 の残課題を解消
+
+#### 変更
+
+- **GUIDE.md**: 各 Step の DD 起票リンク・Gate リンクを SP チケットへ変更
+  - `sample_prompts/0N_*.md` → `doc/SP/SP-00N.md` / `doc/SP/SP-00N-gate.md`
+  - 前提セクションの DD の作り方も SP 運用に合わせて更新
+  - Gate の人間による最終判定を明記
+- **README.md**: コンテンツ一覧・ディレクトリ構造を SP 体系に更新
+- **CLAUDE.md**: リポジトリ構造テーブル・メンテナンス方針を SP 体系に更新
+- **manuals/01_仕様書作成マニュアル.md**: 関連リソーステーブルを SP 体系に更新
+- **doc/SP/SP-002〜006-gate.md**: sample_prompts 参照を削除
+
+---
+
 ## [v0.6.0] — 2026-02-19
 
 ### 実装クイックリファレンス + 価値提案

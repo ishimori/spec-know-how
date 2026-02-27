@@ -26,7 +26,7 @@ LLM（Claude Code 等）を使えばコードは速く書ける。しかし「�
 | [GUIDE.md](GUIDE.md) | **仕様抽出**のクイックリファレンス（Step 1〜6）。どこから始めて何を把握すればいいかを示す |
 | [GUIDE_IMPL.md](GUIDE_IMPL.md) | **実装**のクイックリファレンス（Step 1〜5）。仕様書完成後、どう作り直すかを示す |
 | [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
-| [sample_prompts/](sample_prompts/) | 各ステップの DD 起票用プロンプト + Gate チェックリストを統合。1ファイルで完結 |
+| [doc/SP/](doc/SP/) | 各ステップの SP チケット（親・子・context・gate）。Claude に直接渡して実行する |
 | [how-to/qa-skill.md](how-to/qa-skill.md) | プロジェクト固有の QA スキルの作り方 |
 | [references/](references/) | 教訓（44DD以上の実践から得た知見） |
 
@@ -68,14 +68,14 @@ spec-know-how/
 ├── manuals/                      # 実践マニュアル（包括ガイド）
 │   ├── 01_仕様書作成マニュアル.md # 仕様抽出の詳細手順・ゲート・アンチパターン
 │   └── 02_実装マニュアル.md       # 実装の詳細手順・ゲート・アンチパターン
-├── sample_prompts/               # DD 起票用サンプルプロンプト（各ステップ対応）
-│   ├── README.md                 # 使い方
-│   ├── 01_initial_survey.md      # Gate 1 対応の DD 起票プロンプト
-│   ├── 02_database.md            # Gate 2 対応の DD 起票プロンプト
-│   ├── 03_screens.md             # Gate 3 対応の DD 起票プロンプト
-│   ├── 04_business_logic.md      # Gate 4 対応の DD 起票プロンプト
-│   ├── 05_nfr.md                 # Gate 5 対応の DD 起票プロンプト
-│   └── 06_qa_ready.md            # Gate 6 対応の DD 起票プロンプト
+├── doc/SP/                       # SP チケット（各ステップ対応。Claude に直接渡して実行）
+│   ├── SP-000.md                 # 環境プロファイリング（Gate 0）
+│   ├── SP-001.md〜SP-001-*.md   # Gate 1: 初回調査
+│   ├── SP-002.md〜SP-002-*.md   # Gate 2: DB・データモデル
+│   ├── SP-003.md〜SP-003-*.md   # Gate 3: 画面・UI
+│   ├── SP-004.md〜SP-004-*.md   # Gate 4: 業務ロジック
+│   ├── SP-005.md〜SP-005-*.md   # Gate 5: 非機能要件
+│   └── SP-006.md〜SP-006-*.md   # Gate 6: QA 準備完了
 ├── how-to/
 │   └── qa-skill.md               # QA スキルの作り方
 └── references/
