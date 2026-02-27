@@ -11,7 +11,7 @@
 
 | パス | 用途 |
 |------|------|
-| `GUIDE.md` | 仕様抽出の手順書（Step 1〜6） |
+| `GUIDE_SPEC.md` | 仕様抽出の手順書（Step 1〜6） |
 | `GUIDE_IMPL.md` | 実装の手順書（Step 1〜5） |
 | `manuals/` | 包括マニュアル（仕様作成 + 実装） |
 | `CHANGELOG.md` | バージョン履歴 |
@@ -48,7 +48,7 @@ Claude Code が直接実行でき、標準ライブラリの `ast` モジュー�
 ## メンテナンス方針
 
 - バージョンアップ時は `CHANGELOG.md` に記録する
-- ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE.md` や `doc/SP/` に反映する
+- ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE_SPEC.md` や `doc/SP/` に反映する
 
 ## インポートしたスキル
 

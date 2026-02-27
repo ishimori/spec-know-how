@@ -24,7 +24,7 @@ LLM（[Claude Code](https://claude.ai/code) 等）を使えばコードは速く
 ```mermaid
 flowchart LR
     A["レガシーシステム"]
-    B["① 仕様抽出\nGUIDE.md Step 1〜6"]
+    B["① 仕様抽出\nGUIDE_SPEC.md Step 1〜6"]
     C["仕様書\n＋ QAスキル"]
     D["② 実装\nGUIDE_IMPL.md Step 1〜5"]
     E["新システム"]
@@ -44,7 +44,7 @@ flowchart LR
 
 | コンテンツ | 内容 |
 |-----------|------|
-| [GUIDE.md](GUIDE.md) | **仕様抽出**のクイックリファレンス（Step 1〜6）。どこから始めて何を把握すればいいかを示す |
+| [GUIDE_SPEC.md](GUIDE_SPEC.md) | **仕様抽出**のクイックリファレンス（Step 1〜6）。どこから始めて何を把握すればいいかを示す |
 | [GUIDE_IMPL.md](GUIDE_IMPL.md) | **実装**のクイックリファレンス（Step 1〜5）。仕様書完成後、どう作り直すかを示す |
 | [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
 | [doc/SP/](doc/SP/) | 各ステップの SP チケット（親・子・context・gate）。Claude に直接渡して実行する |
@@ -55,7 +55,7 @@ flowchart LR
 
 |  | クイックリファレンス | 包括マニュアル |
 |--|-------------------|--------------|
-| **仕様抽出**（コードを書く前） | [GUIDE.md](GUIDE.md) | [manuals/01](manuals/01_仕様書作成マニュアル.md) |
+| **仕様抽出**（コードを書く前） | [GUIDE_SPEC.md](GUIDE_SPEC.md) | [manuals/01](manuals/01_仕様書作成マニュアル.md) |
 | **実装**（コードを書く） | [GUIDE_IMPL.md](GUIDE_IMPL.md) | [manuals/02](manuals/02_実装マニュアル.md) |
 
 - **クイックリファレンス** = 「何をするか」のチェックリスト形式。手を動かしながら見る
@@ -67,14 +67,14 @@ flowchart LR
 
 ### 開発者（コードを読む・書く人）
 
-1. [GUIDE.md](GUIDE.md) で仕様抽出の全体像を把握する
+1. [GUIDE_SPEC.md](GUIDE_SPEC.md) で仕様抽出の全体像を把握する
 2. Step ごとに作業を進め、終わったら該当の Gate でチェックする
 3. 情報が揃ったら [how-to/qa-skill.md](how-to/qa-skill.md) を参考に QA スキルを作る
 4. [GUIDE_IMPL.md](GUIDE_IMPL.md) で実装の全体像を把握し、構築に進む
 
 ### プロジェクトリーダー・SA
 
-1. [GUIDE.md](GUIDE.md) + [GUIDE_IMPL.md](GUIDE_IMPL.md) でプロセス全体を把握する
+1. [GUIDE_SPEC.md](GUIDE_SPEC.md) + [GUIDE_IMPL.md](GUIDE_IMPL.md) でプロセス全体を把握する
 2. 各 Gate チェックリストを使って「次に進んでいいか」を確認する
 3. Gate が通過できていない場合は追加調査・修正を指示する
 
@@ -84,7 +84,7 @@ flowchart LR
 
 ```
 spec-know-how/
-├── GUIDE.md                      # 仕様抽出クイックリファレンス（Step 1〜6）
+├── GUIDE_SPEC.md                      # 仕様抽出クイックリファレンス（Step 1〜6）
 ├── GUIDE_IMPL.md                 # 実装クイックリファレンス（Step 1〜5）
 ├── manuals/                      # 実践マニュアル（包括ガイド）
 │   ├── 01_仕様書作成マニュアル.md # 仕様抽出の詳細手順・ゲート・アンチパターン
