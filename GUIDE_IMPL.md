@@ -23,13 +23,16 @@ flowchart LR
     G4{Gate 4}
     G5{Gate 5}
 
+    D["早期デプロイ\n（40-60%完成時）"]
+    DA["横断 DA 分析\n（3DD 完了後）"]
+
     S1 --> G1 --> S2
     S2 --> G2 --> S3
     S3 --> G3 --> S4
+    S3 --> DA
     S4 --> G4 --> S5
     S5 --> G5
 
-    D["デプロイ開始\n（40-60%完成時）"]
     S3 -.-> D
     D -.-> S5
 
@@ -39,11 +42,34 @@ flowchart LR
     style G4 fill:#f9f,stroke:#333
     style G5 fill:#f9f,stroke:#333
     style D fill:#ffd,stroke:#333
+    style DA fill:#fce7f3,stroke:#db2777
 ```
 
 デプロイは全機能完成を待たず、Step 3 中盤（40〜60%完成時）から並行して開始します。
 
 > **注**: このガイドの Gate 1〜5 は実装フェーズ用です。[GUIDE_SPEC.md](GUIDE_SPEC.md) の Gate 1〜6（仕様抽出用）とは番号体系が異なります。詳細は [manuals/02_実装マニュアル.md](manuals/02_実装マニュアル.md) を参照。
+
+---
+
+## 各 Step の共通パターン
+
+> **【DA 批判レビューとは】**: 実装後に「何が壊れるか・何を見落としたか」を Devil's Advocate（悪魔の代弁者）視点で問い直す。1件以上の問題を発見することを必須とする。
+
+全ての Step・DD に共通する作業の進め方です。
+
+```mermaid
+flowchart TD
+    START([Step N / DD 開始]) --> A
+    A["Phase 0: 事前精査（全 Step・DD 共通・必須）\n移行元 submit/save のバリデーション全量リストアップ\n仕様書との突合（漏れの早期発見）\n状態遷移がある場合は遷移図を作成\nDA 批判レビュー"]
+    A --> B["Step 固有の作業\n（Step 2 は 3分割パターン: ①動作 → ②見た目 → ③正確性）\n（他 Step は「やること」セクションに従う）"]
+    B --> C["😈 DA 批判レビュー\n「このPhaseで何が壊れるか」を最低1件発見"]
+    C --> GATE(["Gate チェックリストを確認して\n次の Step へ"])
+
+    style A fill:#fef9c3,stroke:#d97706
+    style C fill:#fce7f3,stroke:#db2777
+```
+
+> **Phase 0 が最重要**: 「移行元コードのバリデーション全量リストアップ → 仕様書との突合」を飛ばすと、UI 層に埋まった条件が漏れ、後から横断バグとして現れる。実績上最も多い失敗パターン。
 
 ---
 
