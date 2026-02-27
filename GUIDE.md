@@ -308,6 +308,6 @@ grep -r "class.*Model" src/ --include="*.py" -l
 | 資料 | 内容 |
 |------|------|
 | [GUIDE_IMPL.md](GUIDE_IMPL.md) | 実装のクイックリファレンス（本書の続き。仕様抽出後の構築手順） |
-| [references/lessons_learned.md](references/lessons_learned.md) | 44DD 以上の実践から得た教訓 |
+| [references/lessons_learned.md](references/lessons_learned.md) | 実プロジェクト経験から得た教訓 |
 | [manuals/](manuals/) | 包括マニュアル（「なぜ・どうやるか」の詳細 + ゲート + アンチパターン） |
 | [how-to/qa-skill.md](how-to/qa-skill.md) | QA スキルの作り方 |

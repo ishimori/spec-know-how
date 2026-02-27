@@ -270,4 +270,4 @@ UI改善、テスト基盤強化、本番デプロイを通じてシステムを
 | [GUIDE.md](GUIDE.md) | 仕様抽出のクイックリファレンス（本書の前段階） |
 | [manuals/02_実装マニュアル.md](manuals/02_実装マニュアル.md) | 本書の詳細版（DA運用ガイド・アンチパターン8件・統合チェックリスト含む） |
 | [manuals/01_仕様書作成マニュアル.md](manuals/01_仕様書作成マニュアル.md) | 仕様作成工程の詳細マニュアル |
-| [references/lessons_learned.md](references/lessons_learned.md) | 44DD以上の実践から得た教訓 |
+| [references/lessons_learned.md](references/lessons_learned.md) | 実プロジェクト経験から得た教訓 |

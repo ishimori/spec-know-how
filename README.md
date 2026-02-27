@@ -6,7 +6,7 @@
 
 ## なぜこのリポジトリが必要か
 
-LLM（Claude Code 等）を使えばコードは速く書ける。しかし「何を作るべきか」を正しく伝えられなければ、速く間違ったものが出来上がるだけです。
+LLM（[Claude Code](https://claude.ai/code) 等）を使えばコードは速く書ける。しかし「何を作るべきか」を正しく伝えられなければ、速く間違ったものが出来上がるだけです。
 
 レガシーシステムの作り直しでは、この問題が特に深刻になります:
 
@@ -15,7 +15,28 @@ LLM（Claude Code 等）を使えばコードは速く書ける。しかし「�
 - **LLM の出力を検証する基準がない**。「動いているから正しい」で進めてしまう
 - **作業の進め方が属人的**。何から手をつけ、どこまでやれば十分かの判断基準がない
 
-このリポジトリは、44DD（Design Decision）以上の実プロジェクト経験から抽出した**手順・判断基準・失敗パターン**を提供します。LLM を「速く書くツール」から「正しく作り直すパートナー」に変えるためのガイドです。
+このリポジトリは、DD（Design Decision）以上の実プロジェクト経験から抽出した**手順・判断基準・失敗パターン**を提供します。LLM を「速く書くツール」から「正しく作り直すパートナー」に変えるためのガイドです。
+
+---
+
+## このリポジトリの位置付け
+
+```mermaid
+flowchart LR
+    A["レガシーシステム"]
+    B["① 仕様抽出\nGUIDE.md Step 1〜6"]
+    C["仕様書\n＋ QAスキル"]
+    D["② 実装\nGUIDE_IMPL.md Step 1〜5"]
+    E["新システム"]
+
+    A --> B --> C --> D --> E
+
+    style B fill:#dbeafe,stroke:#3b82f6
+    style C fill:#dbeafe,stroke:#3b82f6
+    style D fill:#dbeafe,stroke:#3b82f6
+```
+
+青のフェーズ（仕様抽出・仕様書・実装）で、このリポジトリの手順書・SP チケット・マニュアルを使います。各作業の実行は LLM が補助します。
 
 ---
 
@@ -28,7 +49,7 @@ LLM（Claude Code 等）を使えばコードは速く書ける。しかし「�
 | [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
 | [doc/SP/](doc/SP/) | 各ステップの SP チケット（親・子・context・gate）。Claude に直接渡して実行する |
 | [how-to/qa-skill.md](how-to/qa-skill.md) | プロジェクト固有の QA スキルの作り方 |
-| [references/](references/) | 教訓（44DD以上の実践から得た知見） |
+| [references/](references/) | 教訓（実プロジェクト経験から得た知見） |
 
 ### クイックリファレンスとマニュアルの役割分担
 
@@ -79,18 +100,8 @@ spec-know-how/
 ├── how-to/
 │   └── qa-skill.md               # QA スキルの作り方
 └── references/
-    └── lessons_learned.md        # 教訓（44DD以上の経験）
+    └── lessons_learned.md        # 教訓（実プロジェクト経験）
 ```
-
----
-
-## 実績
-
-`housing-e-kintai-next`（Streamlit → React+FastAPI 移行）で実践:
-
-- 約 4,300 行のビジネスロジックを仕様書化
-- 195+ 項目をコードと突合して検証
-- 44 DD 以上の経験から得た教訓を [references/lessons_learned.md](references/lessons_learned.md) にまとめ
 
 ---
 

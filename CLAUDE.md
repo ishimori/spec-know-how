@@ -17,7 +17,7 @@
 | `CHANGELOG.md` | バージョン履歴 |
 | `doc/SP/` | SP チケット（親・子・context・gate）。SP-000〜SP-006 の全37+ファイル |
 | `how-to/` | QAスキルの作り方など |
-| `references/lessons_learned.md` | 教訓（44DD以上の経験） |
+| `references/lessons_learned.md` | 教訓（実プロジェクト経験） |
 
 ## 信頼度ラベル
 
