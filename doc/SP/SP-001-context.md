@@ -62,6 +62,34 @@
 
 ---
 
+## Phase 2: SP-001 スコープのコンテキストファイル実体作成
+
+> Phase 1 で設計・登録したファイルのうち、SP-001-01/02/03 と SP-000 の調査データだけで
+> 作成できるファイルを実際に作成する（SP-002〜005 のデータを待たずに完結できるもの）。
+>
+> **更新型ファイル（known_gaps / new_system_decisions）の注意点**:
+> このフェーズでは初版を作成するだけでよい。SP-002〜005 の各 context チケットが
+> 自分のスコープで発見したギャップ・設計判断を追記していく。
+
+- [ ] SP-001-01 の調査記録を元に `doc/context/system_overview.md` を作成した
+- [ ] SP-001-02 の調査記録を元に `doc/context/tech_stack.md` を作成した
+- [ ] SP-001-01/02 の調査記録を元に `doc/context/module_map.md` を作成した
+- [ ] SP-001-02/03 の調査記録を元に `doc/context/known_gaps.md`（初版）を作成した
+- [ ] SP-000 の設計判断を元に `doc/context/new_system_decisions.md`（初版）を作成した
+- [ ] 作成した全ファイルが CLAUDE.md の仕様書マップに登録されていることを確認した（Phase 1 で登録済み）
+
+### 作成ファイル一覧
+
+| ファイルパス | データ源 | 更新型 | 作成日 |
+|-----------|---------|--------|-------|
+| `doc/context/system_overview.md` | SP-001-01 Phase 1 調査記録 | いいえ | - |
+| `doc/context/tech_stack.md` | SP-001-02 Phase 2 調査記録 | いいえ | - |
+| `doc/context/module_map.md` | SP-001-01/02 調査記録 | いいえ | - |
+| `doc/context/known_gaps.md` | SP-001-02/03 調査記録（初版） | **はい**（SP-002〜005 で追記） | - |
+| `doc/context/new_system_decisions.md` | SP-000 Gate 0（初版） | **はい**（SP-002〜005 で追記） | - |
+
+---
+
 ## DA 分析（このチケットのスコープ限定）
 
 > 「提案したコンテキストファイル構成で、重要な情報が漏れるケースはないか？」の観点で確認する。
