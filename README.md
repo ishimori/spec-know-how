@@ -6,7 +6,7 @@
 
 ## なぜこのリポジトリが必要か
 
-LLM（Claude Code 等）を使えばコードは速く書ける。しかし「何を作るべきか」を正しく伝えられなければ、速く間違ったものが出来上がるだけです。
+LLM（[Claude Code](https://claude.ai/code) 等）を使えばコードは速く書ける。しかし「何を作るべきか」を正しく伝えられなければ、速く間違ったものが出来上がるだけです。
 
 レガシーシステムの作り直しでは、この問題が特に深刻になります:
 
@@ -23,19 +23,19 @@ LLM（Claude Code 等）を使えばコードは速く書ける。しかし「�
 
 | コンテンツ | 内容 |
 |-----------|------|
-| [GUIDE.md](GUIDE.md) | **仕様抽出**のクイックリファレンス（Step 1〜6）。どこから始めて何を把握すればいいかを示す |
+| [GUIDE_SPEC.md](GUIDE_SPEC.md) | **仕様抽出**のクイックリファレンス（Step 1〜6）。どこから始めて何を把握すればいいかを示す |
 | [GUIDE_IMPL.md](GUIDE_IMPL.md) | **実装**のクイックリファレンス（Step 1〜5）。仕様書完成後、どう作り直すかを示す |
 | [manuals/](manuals/) | **実践マニュアル**（包括ガイド）。「なぜ・どうやるか」の詳細 + ゲート定義 + アンチパターン |
-| [sample_prompts/](sample_prompts/) | 各ステップの DD 起票用プロンプト + Gate チェックリストを統合。1ファイルで完結 |
-| [gates/](gates/) | 各ステップの通過基準チェックリスト（参照用。内容は sample_prompts/ に統合済み） |
+| [doc/SP/](doc/SP/) | 各ステップの SP チケット（親・子・context・gate）。Claude に直接渡して実行する |
 | [how-to/qa-skill.md](how-to/qa-skill.md) | プロジェクト固有の QA スキルの作り方 |
-| [references/](references/) | 教訓（44DD以上の実践から得た知見） |
+| [references/lessons_learned.md](references/lessons_learned.md) | 教訓（実プロジェクト経験から得た知見） |
+| [references/llm-pitfalls.md](references/llm-pitfalls.md) | LLM 生成コードを使う際に知っておきたい落とし穴と注意点 |
 
 ### クイックリファレンスとマニュアルの役割分担
 
 |  | クイックリファレンス | 包括マニュアル |
 |--|-------------------|--------------|
-| **仕様抽出**（コードを書く前） | [GUIDE.md](GUIDE.md) | [manuals/01](manuals/01_仕様書作成マニュアル.md) |
+| **仕様抽出**（コードを書く前） | [GUIDE_SPEC.md](GUIDE_SPEC.md) | [manuals/01](manuals/01_仕様書作成マニュアル.md) |
 | **実装**（コードを書く） | [GUIDE_IMPL.md](GUIDE_IMPL.md) | [manuals/02](manuals/02_実装マニュアル.md) |
 
 - **クイックリファレンス** = 「何をするか」のチェックリスト形式。手を動かしながら見る
@@ -47,14 +47,14 @@ LLM（Claude Code 等）を使えばコードは速く書ける。しかし「�
 
 ### 開発者（コードを読む・書く人）
 
-1. [GUIDE.md](GUIDE.md) で仕様抽出の全体像を把握する
+1. [GUIDE_SPEC.md](GUIDE_SPEC.md) で仕様抽出の全体像を把握する
 2. Step ごとに作業を進め、終わったら該当の Gate でチェックする
 3. 情報が揃ったら [how-to/qa-skill.md](how-to/qa-skill.md) を参考に QA スキルを作る
 4. [GUIDE_IMPL.md](GUIDE_IMPL.md) で実装の全体像を把握し、構築に進む
 
 ### プロジェクトリーダー・SA
 
-1. [GUIDE.md](GUIDE.md) + [GUIDE_IMPL.md](GUIDE_IMPL.md) でプロセス全体を把握する
+1. [GUIDE_SPEC.md](GUIDE_SPEC.md) + [GUIDE_IMPL.md](GUIDE_IMPL.md) でプロセス全体を把握する
 2. 各 Gate チェックリストを使って「次に進んでいいか」を確認する
 3. Gate が通過できていない場合は追加調査・修正を指示する
 
@@ -64,42 +64,25 @@ LLM（Claude Code 等）を使えばコードは速く書ける。しかし「�
 
 ```
 spec-know-how/
-├── GUIDE.md                      # 仕様抽出クイックリファレンス（Step 1〜6）
+├── GUIDE_SPEC.md                      # 仕様抽出クイックリファレンス（Step 1〜6）
 ├── GUIDE_IMPL.md                 # 実装クイックリファレンス（Step 1〜5）
 ├── manuals/                      # 実践マニュアル（包括ガイド）
 │   ├── 01_仕様書作成マニュアル.md # 仕様抽出の詳細手順・ゲート・アンチパターン
 │   └── 02_実装マニュアル.md       # 実装の詳細手順・ゲート・アンチパターン
-├── gates/                        # ゲートチェックリスト（参照用。内容は sample_prompts/ に統合済み）
-│   ├── README.md                 # ゲートの使い方（移行案内あり）
-│   ├── 01_initial_survey.md      # Gate 1: 初回調査
-│   ├── 02_database.md            # Gate 2: DB・データモデル
-│   ├── 03_screens.md             # Gate 3: 画面・UI
-│   ├── 04_business_logic.md      # Gate 4: 業務ロジック
-│   ├── 05_nfr.md                 # Gate 5: 非機能要件
-│   └── 06_qa_ready.md            # Gate 6: QA 準備完了
-├── sample_prompts/               # DD 起票用サンプルプロンプト（各ステップ対応）
-│   ├── README.md                 # 使い方
-│   ├── 01_initial_survey.md      # Gate 1 対応の DD 起票プロンプト
-│   ├── 02_database.md            # Gate 2 対応の DD 起票プロンプト
-│   ├── 03_screens.md             # Gate 3 対応の DD 起票プロンプト
-│   ├── 04_business_logic.md      # Gate 4 対応の DD 起票プロンプト
-│   ├── 05_nfr.md                 # Gate 5 対応の DD 起票プロンプト
-│   └── 06_qa_ready.md            # Gate 6 対応の DD 起票プロンプト
+├── doc/SP/                       # SP チケット（各ステップ対応。Claude に直接渡して実行）
+│   ├── SP-000.md                 # 環境プロファイリング（Gate 0）
+│   ├── SP-001.md〜SP-001-*.md   # Gate 1: 初回調査
+│   ├── SP-002.md〜SP-002-*.md   # Gate 2: DB・データモデル
+│   ├── SP-003.md〜SP-003-*.md   # Gate 3: 画面・UI
+│   ├── SP-004.md〜SP-004-*.md   # Gate 4: 業務ロジック
+│   ├── SP-005.md〜SP-005-*.md   # Gate 5: 非機能要件
+│   └── SP-006.md〜SP-006-*.md   # Gate 6: QA 準備完了
 ├── how-to/
 │   └── qa-skill.md               # QA スキルの作り方
 └── references/
-    └── lessons_learned.md        # 教訓（44DD以上の経験）
+    ├── lessons_learned.md        # 教訓（実プロジェクト経験）
+    └── llm-pitfalls.md           # LLM 生成コードの落とし穴と注意点
 ```
-
----
-
-## 実績
-
-`housing-e-kintai-next`（Streamlit → React+FastAPI 移行）で実践:
-
-- 約 4,300 行のビジネスロジックを仕様書化
-- 195+ 項目をコードと突合して検証
-- 44 DD 以上の経験から得た教訓を [references/lessons_learned.md](references/lessons_learned.md) にまとめ
 
 ---
 

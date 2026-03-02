@@ -11,14 +11,13 @@
 
 | パス | 用途 |
 |------|------|
-| `GUIDE.md` | 仕様抽出の手順書（Step 1〜6） |
+| `GUIDE_SPEC.md` | 仕様抽出の手順書（Step 1〜6） |
 | `GUIDE_IMPL.md` | 実装の手順書（Step 1〜5） |
 | `manuals/` | 包括マニュアル（仕様作成 + 実装） |
 | `CHANGELOG.md` | バージョン履歴 |
-| `sample_prompts/` | DD 起票プロンプト + Gate チェックリスト統合（6種） |
-| `gates/` | Gate チェックリスト参照用（内容は sample_prompts/ に統合済み） |
+| `doc/SP/` | SP チケット（親・子・context・gate）。SP-000〜SP-006 の全37+ファイル |
 | `how-to/` | QAスキルの作り方など |
-| `references/lessons_learned.md` | 教訓（44DD以上の経験） |
+| `references/lessons_learned.md` | 教訓（実プロジェクト経験） |
 
 ## 信頼度ラベル
 
@@ -49,4 +48,18 @@ Claude Code が直接実行でき、標準ライブラリの `ast` モジュー�
 ## メンテナンス方針
 
 - バージョンアップ時は `CHANGELOG.md` に記録する
-- ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE.md` や `sample_prompts/` に反映する
+- ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE_SPEC.md` や `doc/SP/` に反映する
+
+## インポートしたスキル
+
+| スキル | 説明 |
+|--------|------|
+| `/dd` | DD設計書の作成・参照・一覧・アーカイブ |
+
+### DD設定（/dd スキル用）
+
+- DDフォルダ: `doc/DD/`
+- アーカイブ: `doc/archived/DD/`
+- テンプレート: `templates/dd_template.md`
+
+インポートしたファイルの詳細は `IMPORTED.md` を参照。
