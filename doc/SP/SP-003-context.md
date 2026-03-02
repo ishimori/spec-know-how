@@ -30,9 +30,8 @@
 
 | ファイル名（案） | 役割（何を書くか） | 書かないもの | 対応する調査元 |
 |--------------|---------------|------------|-------------|
-| `doc/spec/screens/screen_list.md` | 画面一覧・URL・主な機能・API対応 | UIの構成・レイアウト詳細 | SP-003-01 Phase 1 |
-| `doc/spec/screens/flows.md` | 主要操作フロー・画面遷移 | UIの構成・レイアウト詳細 | SP-003-01 Phase 2 |
-| `doc/spec/screens/auth_matrix.md` | 認可マトリクス・複合ロール挙動 | 画面の機能詳細 | SP-003-02 |
+| `doc/spec/functional/screen_spec.md` | 画面一覧・タブ構造・操作フロー・画面遷移 | UIの構成・レイアウト詳細・ipywidgets API詳細 | SP-003-01 Phase 1/2 |
+| `doc/spec/functional/auth_matrix.md` | 認可マトリクス・複合ロール挙動 | 画面の機能詳細 | SP-003-02 |
 
 > 上記は推奨最小構成。プロジェクトの画面数・権限複雑さに応じて調整すること。
 > 動的追加チケット（SP-003-04〜）がある場合、そのチケットの成果物を適切なファイルに統合する。
@@ -55,14 +54,14 @@
 > `known_gaps.md` と `new_system_decisions.md` は SP-001-context で初版が作成される更新型ファイル。
 > このチケットのスコープで発見したギャップ・設計判断をここで追記する。
 
-- [ ] SP-003 の調査で判明した既知ギャップを `doc/context/known_gaps.md` に追記した
-- [ ] SP-003 の調査で決定した新システム向け設計判断があれば `doc/context/new_system_decisions.md` に追記した
+- [ ] SP-003 の調査で判明した既知ギャップを `doc/spec/overview/known_gaps.md` に追記した
+- [ ] SP-003 の調査で決定した新システム向け設計判断があれば `doc/spec/overview/new_system_decisions.md` に追記した
       （追記事項がなければ「なし」と記録してよい）
 
 | ファイル | 追記内容の概要 | 追記あり / なし |
 |---------|------------|--------------|
-| `doc/context/known_gaps.md` | - | - |
-| `doc/context/new_system_decisions.md` | - | - |
+| `doc/spec/overview/known_gaps.md` | - | - |
+| `doc/spec/overview/new_system_decisions.md` | - | - |
 
 ---
 

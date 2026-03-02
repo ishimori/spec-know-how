@@ -31,9 +31,9 @@
 
 | ファイル名（案） | 役割（何を書くか） | 書かないもの | 対応する調査元 | CLAUDE.md キーワード例 |
 |--------------|---------------|------------|-------------|---------------------|
-| `doc/spec/business-logic/rules.md` | バリデーション・業務ルール（BR-ID付き） | 実装の詳細・フラグ遷移 | SP-004-01 | 計算, バリデーション, 上限, 制約 |
-| `doc/spec/business-logic/state_transitions.md` | フラグ・ステータスのライフサイクル | ビジネスルールの意味説明 | SP-004-02 | ステータス, フラグ, 遷移, ワークフロー |
-| `doc/spec/business-logic/integrations.md` | 外部システム連携仕様 | 内部業務ロジック | SP-004-03 | API, 外部, 連携, 送信 |
+| `doc/spec/functional/business_rules.md` | バリデーション・業務ルール（BR-ID付き） | 実装の詳細・フラグ遷移 | SP-004-01 | 計算, バリデーション, 上限, 制約 |
+| `doc/spec/functional/state_transitions.md` | フラグ・ステータスのライフサイクル | ビジネスルールの意味説明 | SP-004-02 | ステータス, フラグ, 遷移, ワークフロー |
+| `doc/spec/functional/integrations.md` | 外部システム連携仕様 | 内部業務ロジック | SP-004-03 | API, 外部, 連携, 送信 |
 
 > 上記は推奨最小構成。プロジェクトの規模・フロー数・外部連携数に応じて調整すること。
 > フロー分割チケット（SP-004-04〜）がある場合、そのチケットの成果物を適切なファイルに統合またはファイルを追加する。
@@ -64,14 +64,14 @@
 > `known_gaps.md` と `new_system_decisions.md` は SP-001-context で初版が作成される更新型ファイル。
 > このチケットのスコープで発見したギャップ・設計判断をここで追記する。
 
-- [ ] SP-004 の調査で判明した既知ギャップを `doc/context/known_gaps.md` に追記した
-- [ ] SP-004 の調査で決定した新システム向け設計判断があれば `doc/context/new_system_decisions.md` に追記した
+- [ ] SP-004 の調査で判明した既知ギャップを `doc/spec/overview/known_gaps.md` に追記した
+- [ ] SP-004 の調査で決定した新システム向け設計判断があれば `doc/spec/overview/new_system_decisions.md` に追記した
       （追記事項がなければ「なし」と記録してよい）
 
 | ファイル | 追記内容の概要 | 追記あり / なし |
 |---------|------------|--------------|
-| `doc/context/known_gaps.md` | - | - |
-| `doc/context/new_system_decisions.md` | - | - |
+| `doc/spec/overview/known_gaps.md` | - | - |
+| `doc/spec/overview/new_system_decisions.md` | - | - |
 
 ---
 

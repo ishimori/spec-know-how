@@ -6,7 +6,7 @@
 
 **マニュアル対応**: 特定の Step に非対応（全工程を横断）— SP-002-01〜03（および動的追加分）の成果物を集約し、永続的なデータ層仕様書ファイルの構成を設計する
 
-**目的**: SP-002-01〜03（および動的追加チケットを含む全子チケット）の調査結果を統合し、後続の SP が参照するデータ層仕様書ファイルの構成・ファイル名・記述内容を設計する。DB パスでは `doc/spec/db/` 配下に DB 仕様書を作成する。ファイルベースパスでは `doc/context/data_schema.md` を作成する。
+**目的**: SP-002-01〜03（および動的追加チケットを含む全子チケット）の調査結果を統合し、後続の SP が参照するデータ層仕様書ファイルの構成・ファイル名・記述内容を設計する。DB パスでは `doc/spec/db/` 配下に DB 仕様書を作成する。ファイルベースパスでは `doc/spec/functional/data_schema.md` を作成する。
 
 **最終的な使われ方**: ここで設計したファイル構成に従って仕様書を作成する（実際のファイル作成はこのチケット内で行う）。作成したファイルは `CLAUDE.md` の仕様書マップおよび `document_map.md` に追記し、SP-003 以降から参照可能にする
 
@@ -56,10 +56,10 @@
 
 | ファイル名 | 役割（何を書くか） | 書かないもの | 対応する調査元 |
 |----------|---------------|------------|-------------|
-| `doc/context/data_schema.md` | CSVファイル群の列構成・CDXML役割（入力マスタ/出力）・中間データ形式・JSON構造・ファイル間のキー関係 | 新システムのDB設計・将来の技術選定 | SP-002-01 Phase 1' / SP-002-02 Phase 1' / SP-002-03 Phase 2' |
+| `doc/spec/functional/data_schema.md` | CSVファイル群の列構成・CDXML役割（入力マスタ/出力）・中間データ形式・JSON構造・ファイル間のキー関係 | 新システムのDB設計・将来の技術選定 | SP-002-01 Phase 1' / SP-002-02 Phase 1' / SP-002-03 Phase 2' |
 
 > 動的追加チケット（SP-002-04〜）がある場合は、そのチケットの成果物を `data_schema.md` に統合する。
-> ファイル数が非常に多い場合は `doc/context/data_schema_csv.md`（CSV専用）/ `doc/context/data_schema_cdxml.md`（CDXML専用）に分割することを検討する。
+> ファイル数が非常に多い場合は `doc/spec/functional/data_schema_csv.md`（CSV専用）/ `doc/spec/functional/data_schema_cdxml.md`（CDXML専用）に分割することを検討する。
 
 ### 作成した仕様書ファイルの記録
 
@@ -85,14 +85,14 @@
 > `known_gaps.md` と `new_system_decisions.md` は SP-001-context で初版が作成される更新型ファイル。
 > このチケットのスコープで発見したギャップ・設計判断をここで追記する。
 
-- [ ] SP-002 の調査で判明した既知ギャップを `doc/context/known_gaps.md` に追記した
-- [ ] SP-002 の調査で決定した新システム向け設計判断があれば `doc/context/new_system_decisions.md` に追記した
+- [ ] SP-002 の調査で判明した既知ギャップを `doc/spec/overview/known_gaps.md` に追記した
+- [ ] SP-002 の調査で決定した新システム向け設計判断があれば `doc/spec/overview/new_system_decisions.md` に追記した
       （追記事項がなければ「なし」と記録してよい）
 
 | ファイル | 追記内容の概要 | 追記あり / なし |
 |---------|------------|--------------|
-| `doc/context/known_gaps.md` | - | - |
-| `doc/context/new_system_decisions.md` | - | - |
+| `doc/spec/overview/known_gaps.md` | - | - |
+| `doc/spec/overview/new_system_decisions.md` | - | - |
 
 ---
 

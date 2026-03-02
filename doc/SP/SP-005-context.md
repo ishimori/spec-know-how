@@ -63,14 +63,14 @@
 > `known_gaps.md` と `new_system_decisions.md` は SP-001-context で初版が作成される更新型ファイル。
 > このチケットのスコープで発見したギャップ・設計判断をここで追記する。
 
-- [ ] SP-005 の調査で判明した既知ギャップを `doc/context/known_gaps.md` に追記した
-- [ ] SP-005 の調査で決定した新システム向け設計判断があれば `doc/context/new_system_decisions.md` に追記した
+- [ ] SP-005 の調査で判明した既知ギャップを `doc/spec/overview/known_gaps.md` に追記した
+- [ ] SP-005 の調査で決定した新システム向け設計判断があれば `doc/spec/overview/new_system_decisions.md` に追記した
       （追記事項がなければ「なし」と記録してよい）
 
 | ファイル | 追記内容の概要 | 追記あり / なし |
 |---------|------------|--------------|
-| `doc/context/known_gaps.md` | - | - |
-| `doc/context/new_system_decisions.md` | - | - |
+| `doc/spec/overview/known_gaps.md` | - | - |
+| `doc/spec/overview/new_system_decisions.md` | - | - |
 
 ---
 

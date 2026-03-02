@@ -15,7 +15,7 @@
 **マニュアル対応**: [manuals/01_仕様書作成マニュアル.md](../../manuals/01_仕様書作成マニュアル.md) の特定 Step には直接対応しないが、**SP-002 以降の全工程の品質を左右する設計工程**。
 
 **目的**: SP-001-01〜03 の全調査結果を集約し、SP-002 以降の AI セッションが参照する
-`doc/context/` のファイル構成を設計する。
+`doc/spec/` 配下のファイル構成を設計する。
 原則として「旧システムの事実記録」と「新システムの設計判断」は必ず別ファイルに分離すること。
 
 **最終的な使われ方**: ここで設計したコンテキストファイルが、**以降の全 AI セッションの「システム理解の基盤」**となる。ファイル構成の設計ミスは SP-002 以降の調査精度に直接影響する。
@@ -39,14 +39,15 @@
 > 以下は「どのプロジェクトでもほぼ必要になる」最小セット。
 > 不要なファイルは削除し、必要なファイルは追加して設計記録テーブルに反映してください。
 
-| ファイル名（`doc/context/` 配下） | 何を書くか | 何を書かないか |
+| ファイルパス（`doc/spec/` 配下） | 何を書くか | 何を書かないか |
 |--------------------------------|----------|------------|
-| `system_overview.md` | システム全体の目的・主要機能・ユーザー種別（旧システムの事実） | 新システムの設計判断、将来の機能 |
-| `tech_stack.md` | 言語・FW・バージョン・主要ライブラリ（SP-001-02 の結果） | 新システムの技術選定候補 |
-| `db_overview.md` | テーブル数・主要テーブルの役割・DB種別（DB有りの場合のみ） | 新システムのDB設計 |
-| `external_integrations.md` | 外部連携システム一覧・API種別・認証方式（SP-000 グループE の結果） | 連携先の内部仕様 |
-| `known_gaps.md` | コードとドキュメントの食い違い・信頼度 Low の項目（SP-001-03 の結果） | 推測・未確認の情報 |
-| `new_system_decisions.md` | 新システムの設計判断・技術選定（リエンジニアリング目的の場合のみ） | 旧システムの事実記録 |
+| `overview/system_overview.md` | システム全体の目的・主要機能・ユーザー種別（旧システムの事実） | 新システムの設計判断、将来の機能 |
+| `overview/tech_stack.md` | 言語・FW・バージョン・主要ライブラリ（SP-001-02 の結果） | 新システムの技術選定候補 |
+| `overview/module_map.md` | app_core 各モジュール責務・クラス・関数・依存関係（旧システムの事実） | 新システム設計 |
+| `overview/known_gaps.md` | コードとドキュメントの食い違い・信頼度 Low の項目（SP-001-03 の結果） | 推測・未確認の情報 |
+| `overview/new_system_decisions.md` | 新システムの設計判断・技術選定（リエンジニアリング目的の場合のみ） | 旧システムの事実記録 |
+| `overview/db_overview.md` | テーブル数・主要テーブルの役割・DB種別（DB有りの場合のみ） | 新システムのDB設計 |
+| `overview/external_integrations.md` | 外部連携システム一覧・API種別・認証方式（SP-000 グループE の結果） | 連携先の内部仕様 |
 
 > **スキップ可能なファイル**:
 > - `db_overview.md` → SP-000「DB なし」の場合はスキップ
@@ -71,22 +72,22 @@
 > このフェーズでは初版を作成するだけでよい。SP-002〜005 の各 context チケットが
 > 自分のスコープで発見したギャップ・設計判断を追記していく。
 
-- [ ] SP-001-01 の調査記録を元に `doc/context/system_overview.md` を作成した
-- [ ] SP-001-02 の調査記録を元に `doc/context/tech_stack.md` を作成した
-- [ ] SP-001-01/02 の調査記録を元に `doc/context/module_map.md` を作成した
-- [ ] SP-001-02/03 の調査記録を元に `doc/context/known_gaps.md`（初版）を作成した
-- [ ] SP-000 の設計判断を元に `doc/context/new_system_decisions.md`（初版）を作成した
+- [ ] SP-001-01 の調査記録を元に `doc/spec/overview/system_overview.md` を作成した
+- [ ] SP-001-02 の調査記録を元に `doc/spec/overview/tech_stack.md` を作成した
+- [ ] SP-001-01/02 の調査記録を元に `doc/spec/overview/module_map.md` を作成した
+- [ ] SP-001-02/03 の調査記録を元に `doc/spec/overview/known_gaps.md`（初版）を作成した
+- [ ] SP-000 の設計判断を元に `doc/spec/overview/new_system_decisions.md`（初版）を作成した
 - [ ] 作成した全ファイルが CLAUDE.md の仕様書マップに登録されていることを確認した（Phase 1 で登録済み）
 
 ### 作成ファイル一覧
 
 | ファイルパス | データ源 | 更新型 | 作成日 |
 |-----------|---------|--------|-------|
-| `doc/context/system_overview.md` | SP-001-01 Phase 1 調査記録 | いいえ | - |
-| `doc/context/tech_stack.md` | SP-001-02 Phase 2 調査記録 | いいえ | - |
-| `doc/context/module_map.md` | SP-001-01/02 調査記録 | いいえ | - |
-| `doc/context/known_gaps.md` | SP-001-02/03 調査記録（初版） | **はい**（SP-002〜005 で追記） | - |
-| `doc/context/new_system_decisions.md` | SP-000 Gate 0（初版） | **はい**（SP-002〜005 で追記） | - |
+| `doc/spec/overview/system_overview.md` | SP-001-01 Phase 1 調査記録 | いいえ | - |
+| `doc/spec/overview/tech_stack.md` | SP-001-02 Phase 2 調査記録 | いいえ | - |
+| `doc/spec/overview/module_map.md` | SP-001-01/02 調査記録 | いいえ | - |
+| `doc/spec/overview/known_gaps.md` | SP-001-02/03 調査記録（初版） | **はい**（SP-002〜005 で追記） | - |
+| `doc/spec/overview/new_system_decisions.md` | SP-000 Gate 0（初版） | **はい**（SP-002〜005 で追記） | - |
 
 ---
 
