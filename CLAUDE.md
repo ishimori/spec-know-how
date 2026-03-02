@@ -50,6 +50,20 @@ Claude Code が直接実行でき、標準ライブラリの `ast` モジュー�
 - バージョンアップ時は `CHANGELOG.md` に記録する
 - ゲートや手順の改善は実績から得た教訓を `references/lessons_learned.md` に追記し、`GUIDE_SPEC.md` や `doc/SP/` に反映する
 
+## 仕様書マップ（Trial-20260302 プロジェクト）
+
+> SP-001-context で設計したコンテキストファイル一覧。SP-002 以降のセッションはこれを参照する。
+> ファイルは `doc/context/` 配下に作成する（SP-002 以降で順次作成）。
+
+| ファイル | 内容 | 書き分けルール |
+|---------|------|-------------|
+| `doc/context/system_overview.md` | システム目的・主要機能・データフロー（旧システム事実） | 新システム設計は書かない |
+| `doc/context/tech_stack.md` | 言語・FW・ライブラリ・バージョン（旧システム事実） | 新技術選定候補は書かない |
+| `doc/context/data_schema.md` | CSVファイル構造・CDXML役割・中間データ形式（旧システム事実） | 新システムDB設計は書かない |
+| `doc/context/module_map.md` | app_core 各モジュール責務・クラス・関数・依存関係（旧システム事実） | 新システム設計は書かない |
+| `doc/context/known_gaps.md` | テストなし・requirements.txt なし等の既知不確実性 | 推測は書かない |
+| `doc/context/new_system_decisions.md` | Vue3+Vite/Python/SQLite等の設計判断（新システム） | 旧システム事実は書かない |
+
 ## インポートしたスキル
 
 | スキル | 説明 |
