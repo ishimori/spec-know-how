@@ -63,6 +63,8 @@ Claude Code が直接実行でき、標準ライブラリの `ast` モジュー�
 | `doc/context/module_map.md` | app_core 各モジュール責務・クラス・関数・依存関係（旧システム事実） | 新システム設計は書かない |
 | `doc/context/known_gaps.md` | テストなし・requirements.txt なし等の既知不確実性 | 推測は書かない |
 | `doc/context/new_system_decisions.md` | Vue3+Vite/Python/SQLite等の設計判断（新システム） | 旧システム事実は書かない |
+| `doc/context/business_rules.md` | 業務ルール・計算式・フロー制御（BR-001〜016）（旧システム事実） | 新システムの実装判断は書かない |
+| `doc/context/state_transitions.md` | フラグ・ステータスのライフサイクル（Type列・is_locked・registry_view_mode）（旧システム事実） | 新システムの設計は書かない |
 
 ## インポートしたスキル
 
