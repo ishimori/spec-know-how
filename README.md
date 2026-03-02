@@ -19,27 +19,6 @@ LLM（[Claude Code](https://claude.ai/code) 等）を使えばコードは速く
 
 ---
 
-## このリポジトリの位置付け
-
-```mermaid
-flowchart LR
-    A["レガシーシステム"]
-    B["① 仕様抽出\nGUIDE_SPEC.md Step 1〜6"]
-    C["仕様書\n＋ QAスキル"]
-    D["② 実装\nGUIDE_IMPL.md Step 1〜5"]
-    E["新システム"]
-
-    A --> B --> C --> D --> E
-
-    style B fill:#dbeafe,stroke:#3b82f6
-    style C fill:#dbeafe,stroke:#3b82f6
-    style D fill:#dbeafe,stroke:#3b82f6
-```
-
-青のフェーズ（仕様抽出・仕様書・実装）で、このリポジトリの手順書・SP チケット・マニュアルを使います。各作業の実行は LLM が補助します。
-
----
-
 ## この参考書でできること
 
 | コンテンツ | 内容 |
